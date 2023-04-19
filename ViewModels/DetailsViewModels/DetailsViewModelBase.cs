@@ -1,7 +1,6 @@
 ﻿using GoT_Wiki.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace GoT_Wiki.ViewModels
 {
@@ -31,9 +30,9 @@ namespace GoT_Wiki.ViewModels
             _service = service;
         }
 
-        public async Task Load(string url)
+        public void Load(TClass elemenet)
         {
-            Element = await _service.GetAsync(url);
+            Element = elemenet;
         }
 
         protected virtual void Process(TClass element) { }

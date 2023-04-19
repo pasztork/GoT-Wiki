@@ -60,49 +60,5 @@
                 HorizontalAlignment="Left"
                 Margin="20,20,0,20"/>
         </Grid>
-
-        <Grid
-            Grid.Row="0"
-            Grid.Column="1"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Right"
-            MinWidth="300">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button
-                x:Name="PreviousPageButton"
-                Grid.Column="0"
-                Width="Auto"
-                Height="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}">
-                <TextBlock
-                    Text="Previous"
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-            </Button>
-
-            <Button
-                x:Name="NextPageButton"
-                Grid.Column="1"
-                Width="Auto"
-                Height="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}">
-                <TextBlock
-                    Text="Next"
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-            </Button>
-
-        </Grid>
     </Grid>
 </Page>

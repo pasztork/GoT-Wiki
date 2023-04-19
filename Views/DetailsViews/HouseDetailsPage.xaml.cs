@@ -24,8 +24,8 @@ namespace GoT_Wiki.Views.DetailsViews
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var book = e.Parameter as House;
-            _ = ViewModel.Load(book.Url);
+            var house = e.Parameter as House;
+            ViewModel.Load(house);
         }
     }
 }
