@@ -3,9 +3,9 @@ using GoT_Wiki.Services;
 
 namespace GoT_Wiki.ViewModels
 {
-    public class CharactersPageViewModel : ViewModelBase<Character>
+    public class CharacterDetailsViewModel : DetailsViewModelBase<Character>
     {
-        public CharactersPageViewModel() : base(new CharactersService()) { }
+        public CharacterDetailsViewModel() : base(new CharactersService()) { }
 
         protected override void Process(Character element)
         {

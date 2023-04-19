@@ -13,9 +13,10 @@
         <vm:HousesPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
+    <Grid 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
 
         <!-- Grid size -->
         <Grid.RowDefinitions>
@@ -107,15 +108,20 @@
         </Grid>
 
         <!-- Houses list -->
-        <ListView Grid.Row="1"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="2"
-                  ItemsSource="{Binding Collection}">
+        <ListView 
+            x:Name="HouseList"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding Collection}"
+            IsItemClickEnabled="True"
+            ItemClick="HouseList_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Name}"
-                                   Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock 
+                            Text="{Binding Name}"
+                            Style="{StaticResource TitleTextBlockStyle}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

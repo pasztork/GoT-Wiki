@@ -126,17 +126,30 @@
     <Compile Include="Services\CharactersService.cs" />
     <Compile Include="Services\HousesService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
-    <Compile Include="ViewModels\CharactersPageViewModel.cs" />
-    <Compile Include="ViewModels\HousesPageViewModel.cs" />
-    <Compile Include="ViewModels\BooksPageViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\BooksPage.xaml.cs">
+    <Compile Include="ViewModels\DetailsViewModels\HouseDetailsPageViewModel.cs" />
+    <Compile Include="ViewModels\DetailsViewModels\CharacterDetailsPageViewModel.cs" />
+    <Compile Include="ViewModels\DetailsViewModels\BookDetailsPageViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModels\CharactersPageViewModel.cs" />
+    <Compile Include="ViewModels\DetailsViewModels\DetailsViewModelBase.cs" />
+    <Compile Include="ViewModels\ListViewModels\HousesPageViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModels\BooksPageViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModels\ListViewModelBase.cs" />
+    <Compile Include="Views\DetailsViews\BookDetailsPage.xaml.cs">
+      <DependentUpon>BookDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailsViews\CharacterDetailsPage.xaml.cs">
+      <DependentUpon>CharacterDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailsViews\HouseDetailsPage.xaml.cs">
+      <DependentUpon>HouseDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListViews\BooksPage.xaml.cs">
       <DependentUpon>BooksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CharactersPage.xaml.cs">
+    <Compile Include="Views\ListViews\CharactersPage.xaml.cs">
       <DependentUpon>CharactersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HousesPage.xaml.cs">
+    <Compile Include="Views\ListViews\HousesPage.xaml.cs">
       <DependentUpon>HousesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
@@ -164,15 +177,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\BooksPage.xaml">
+    <Page Include="Views\DetailsViews\BookDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CharactersPage.xaml">
+    <Page Include="Views\DetailsViews\CharacterDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HousesPage.xaml">
+    <Page Include="Views\DetailsViews\HouseDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListViews\BooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListViews\CharactersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListViews\HousesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

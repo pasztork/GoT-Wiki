@@ -8,9 +8,9 @@ namespace GoT_Wiki.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HousesPage : Page
+    public sealed partial class BooksPage : Page
     {
-        public HousesPage()
+        public BooksPage()
         {
             this.InitializeComponent();
         }
@@ -44,6 +44,11 @@ namespace GoT_Wiki.Views
         {
             NextPageButton.IsEnabled = true;
             PreviousPageButton.IsEnabled = true;
+        }
+
+        private void BookList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(BookDetailsPage), e.ClickedItem);
         }
     }
 }

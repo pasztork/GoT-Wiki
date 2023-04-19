@@ -17,9 +17,9 @@ namespace GoT_Wiki.Services
             set { _pageSize = value; }
         }
 
-        public ServiceBase(string apiKey)
+        public ServiceBase(string apiEndpoint)
         {
-            _apiEndpoint = apiKey;
+            _apiEndpoint = apiEndpoint;
         }
 
         public async Task<IList<TClass>> GetAsync(int pageNumber)
@@ -31,6 +31,19 @@ namespace GoT_Wiki.Services
                 var response = await client.GetAsync(uri);
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IList<TClass>>(json);
+            }
+            return result;
+        }
+
+        public async Task<TClass> GetAsync(string url)
+        {
+            var uri = new Uri(url);
+            TClass result = default;
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(uri);
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<TClass>(json);
             }
             return result;
         }

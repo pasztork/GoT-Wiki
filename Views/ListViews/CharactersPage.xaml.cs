@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using GoT_Wiki.Views.DetailsViews;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -44,6 +45,11 @@ namespace GoT_Wiki.Views
         {
             NextPageButton.IsEnabled = true;
             PreviousPageButton.IsEnabled = true;
+        }
+
+        private void CharacterList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
         }
     }
 }

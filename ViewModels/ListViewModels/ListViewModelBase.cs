@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.ViewModels
 {
-    public abstract class ViewModelBase<TClass> : INotifyCollectionChanged
+    public abstract class ListViewModelBase<TClass> : INotifyCollectionChanged
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         public ObservableCollection<TClass> Collection { get; } = new ObservableCollection<TClass>();
 
-        private int _pageNumber = 0;
-        private readonly int _pageSize = 10;
+        private static int _pageNumber = 1;
+        private static readonly int _pageSize = 10;
         private readonly ServiceBase<TClass> _service = null;
 
-        public ViewModelBase(ServiceBase<TClass> service)
+        public ListViewModelBase(ServiceBase<TClass> service)
         {
             _service = service;
             _service.PageSize = _pageSize;
@@ -24,12 +24,12 @@ namespace GoT_Wiki.ViewModels
 
         private async Task InitTask()
         {
-            await FetchNextPage();
+            await LoadPage();
         }
 
         public async Task FetchNextPage()
         {
-            if (Collection.Count < _pageSize && _pageNumber > 0)
+            if (Collection.Count < _pageSize && _pageNumber > 1)
             {
                 return;
             }

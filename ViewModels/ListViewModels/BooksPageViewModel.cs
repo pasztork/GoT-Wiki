@@ -3,7 +3,7 @@ using GoT_Wiki.Services;
 
 namespace GoT_Wiki.ViewModels
 {
-    public class BooksPageViewModel : ViewModelBase<Book>
+    public class BooksPageViewModel : ListViewModelBase<Book>
     {
         public BooksPageViewModel() : base(new BooksService()) { }
     }
