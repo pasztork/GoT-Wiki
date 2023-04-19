@@ -8,33 +8,33 @@ namespace GoT_Wiki.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private TClass _element = default;
-        public TClass Element
+        private TClass _item = default;
+        public TClass Item
         {
-            get { return _element; }
+            get { return _item; }
             set
             {
-                if (!EqualityComparer<TClass>.Default.Equals(_element, value))
+                if (!EqualityComparer<TClass>.Default.Equals(_item, value))
                 {
-                    _element = value;
-                    Process(_element);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Element)));
+                    _item = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Item)));
                 }
             }
         }
 
-        private readonly ServiceBase<TClass> _service = null;
+        protected readonly ServiceBase<TClass> service = null;
 
         public DetailsViewModelBase(ServiceBase<TClass> service)
         {
-            _service = service;
+            this.service = service;
         }
 
         public void Load(TClass elemenet)
         {
-            Element = elemenet;
+            Item = elemenet;
+            OnLoad();
         }
 
-        protected virtual void Process(TClass element) { }
+        protected virtual void OnLoad() { }
     }
 }

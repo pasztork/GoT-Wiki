@@ -27,5 +27,57 @@ namespace GoT_Wiki.Views
             var book = e.Parameter as Book;
             ViewModel.Load(book);
         }
+
+        private async void NextCharacterBatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisableCharacterFetchButtons();
+            await ViewModel.FetchNextBatch();
+            EnableCharacterFetchButtons();
+        }
+
+        private async void PreviousCharacterBatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisableCharacterFetchButtons();
+            await ViewModel.FetchPreviousBatch();
+            EnableCharacterFetchButtons();
+        }
+
+        private void DisableCharacterFetchButtons()
+        {
+            PreviousCharacterBatchButton.IsEnabled = false;
+            NextCharacterBatchButton.IsEnabled = false;
+        }
+
+        private void EnableCharacterFetchButtons()
+        {
+            PreviousCharacterBatchButton.IsEnabled = true;
+            NextCharacterBatchButton.IsEnabled = true;
+        }
+
+        private async void NextPovCharactersButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisablePovCharacterFetchButtons();
+            await ViewModel.FetchNextPovCharacterBatch();
+            EnablePovCharacterFetchButtons();
+        }
+
+        private async void PreviousPovCharactersButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisablePovCharacterFetchButtons();
+            await ViewModel.FetchPreviousPovCharacterBatch();
+            EnablePovCharacterFetchButtons();
+        }
+
+        private void DisablePovCharacterFetchButtons()
+        {
+            PreviousPovCharactersButton.IsEnabled = false;
+            NextPovCharactersButton.IsEnabled = false;
+        }
+
+        private void EnablePovCharacterFetchButtons()
+        {
+            PreviousPovCharactersButton.IsEnabled = true;
+            NextPovCharactersButton.IsEnabled = true;
+        }
     }
 }

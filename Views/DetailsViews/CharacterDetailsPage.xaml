@@ -53,7 +53,7 @@
                 Click="BackButton_Click" />
 
             <TextBlock 
-                Text="{Binding Element.Name}"
+                Text="{Binding Item.Name}"
                 Style="{StaticResource HeaderTextBlockStyle}"
                 Grid.Column="1"
                 VerticalAlignment="Center"

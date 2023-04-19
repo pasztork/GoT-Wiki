@@ -31,6 +31,23 @@ namespace GoT_Wiki.Services
                 var response = await client.GetAsync(uri);
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IList<TClass>>(json);
+                foreach (var item in result)
+                {
+                    Process(item);
+                }
+            }
+            return result;
+        }
+
+        public async Task<TClass> GetAsync(Uri uri)
+        {
+            TClass result = default;
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(uri);
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<TClass>(json);
+                Process(result);
             }
             return result;
         }
@@ -38,14 +55,9 @@ namespace GoT_Wiki.Services
         public async Task<TClass> GetAsync(string url)
         {
             var uri = new Uri(url);
-            TClass result = default;
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(uri);
-                var json = await response.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<TClass>(json);
-            }
-            return result;
+            return await GetAsync(uri);
         }
+
+        protected virtual void Process(TClass item) { }
     }
 }

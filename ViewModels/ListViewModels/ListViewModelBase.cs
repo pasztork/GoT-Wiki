@@ -51,11 +51,10 @@ namespace GoT_Wiki.ViewModels
 
         private async Task LoadPage()
         {
-            var elements = await _service.GetAsync(_pageNumber);
+            var items = await _service.GetAsync(_pageNumber);
             ClearCollection();
-            foreach (var element in elements)
+            foreach (var element in items)
             {
-                Process(element);
                 AddCharacterToCollection(element);
             }
         }
@@ -72,7 +71,5 @@ namespace GoT_Wiki.ViewModels
             CollectionChanged?.Invoke(this,
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Collection, Collection.Count - 1));
         }
-
-        protected virtual void Process(TClass element) { }
     }
 }

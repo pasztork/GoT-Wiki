@@ -119,11 +119,9 @@
             ItemClick="CharacterList_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock 
-                            Text="{Binding Name}"
-                            Style="{StaticResource TitleTextBlockStyle}"/>
-                    </StackPanel>
+                    <TextBlock 
+                        Text="{Binding Name}"
+                        Style="{StaticResource TitleTextBlockStyle}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
