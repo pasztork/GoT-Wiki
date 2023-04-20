@@ -25,18 +25,7 @@ namespace GoT_Wiki.Services
         public async Task<IList<TClass>> GetAsync(int pageNumber)
         {
             var uri = new Uri(_serverUrl, $"{_apiEndpoint}?page={pageNumber}&pageSize={_pageSize}");
-            IList<TClass> result = null;
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(uri);
-                var json = await response.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<IList<TClass>>(json);
-                foreach (var item in result)
-                {
-                    Process(item);
-                }
-            }
-            return result;
+            return await GetAllMatching(uri);
         }
 
         public async Task<TClass> GetAsync(Uri uri)
@@ -59,5 +48,27 @@ namespace GoT_Wiki.Services
         }
 
         protected virtual void Process(TClass item) { }
+
+        public async Task<IList<TClass>> GetByNameAsync(string name)
+        {
+            var uri = new Uri(_serverUrl, $"{_apiEndpoint}?name={name}");
+            return await GetAllMatching(uri);
+        }
+
+        private async Task<IList<TClass>> GetAllMatching(Uri uri)
+        {
+            IList<TClass> result = null;
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(uri);
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<IList<TClass>>(json);
+                foreach (var item in result)
+                {
+                    Process(item);
+                }
+            }
+            return result;
+        }
     }
 }

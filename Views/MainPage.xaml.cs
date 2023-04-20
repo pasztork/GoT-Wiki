@@ -28,5 +28,10 @@ namespace GoT_Wiki.Views
         {
             Frame.Navigate(typeof(HousesPage));
         }
+
+        private void SearchBar_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            Frame.Navigate(typeof(SearchResultPage));
+        }
     }
 }

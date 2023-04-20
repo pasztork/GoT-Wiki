@@ -8,9 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center">
+    <Grid 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
 
         <!-- Grid size -->
         <Grid.RowDefinitions>
@@ -28,63 +29,73 @@
         </Grid.ColumnDefinitions>
 
         <!-- Page header -->
-        <TextBlock Text="Game of Thrones Wiki"
-                   Style="{StaticResource HeaderTextBlockStyle}"
-                   Grid.Row="0"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="3"
-                   Margin="0,0,0,30"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Left"/>
+        <TextBlock 
+            Text="Game of Thrones Wiki"
+            Style="{StaticResource HeaderTextBlockStyle}"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,30"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"/>
 
         <!-- Search bar -->
-        <AutoSuggestBox PlaceholderText="Search for something..."
-                        QueryIcon="Find"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="3"
-                        Margin="0,0,0,10"/>
+        <AutoSuggestBox 
+            x:Name="SearchBar"
+            PlaceholderText="Enter name and search..."
+            QueryIcon="Find"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,10"
+            QuerySubmitted="SearchBar_QuerySubmitted"/>
 
         <!-- Buttons -->
-        <Button x:Name="BooksButton"
-                Grid.Row="2" 
-                Grid.Column="1"
-                Margin="0,0,5,0"
-                Width="200"
-                Height="100"
-                Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
-                Click="BooksButton_Click">
-            <TextBlock Text="Books"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+        <Button 
+            x:Name="BooksButton"
+            Grid.Row="2" 
+            Grid.Column="1"
+            Margin="0,0,5,0"
+            Width="200"
+            Height="100"
+            Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
+            Click="BooksButton_Click">
+            <TextBlock 
+                Text="Books"
+                Style="{StaticResource TitleTextBlockStyle}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
         </Button>
 
-        <Button x:Name="CharactersButton"
-                Grid.Row="2" 
-                Grid.Column="2"
-                Margin="0,0,5,0"
-                Width="200"
-                Height="100"
-                Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
-                Click="CharactersButton_Click">
-            <TextBlock Text="Characters"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+        <Button 
+            x:Name="CharactersButton"
+            Grid.Row="2" 
+            Grid.Column="2"
+            Margin="0,0,5,0"
+            Width="200"
+            Height="100"
+            Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
+            Click="CharactersButton_Click">
+            <TextBlock 
+                Text="Characters"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
         </Button>
 
-        <Button x:Name="HousesButton"
-                Grid.Row="2" 
-                Grid.Column="3"
-                Width="200"
-                Height="100"
-                Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
-                Click="HousesButton_Click">
-            <TextBlock Text="Houses"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+        <Button 
+            x:Name="HousesButton"
+            Grid.Row="2" 
+            Grid.Column="3"
+            Width="200"
+            Height="100"
+            Style="{ThemeResource CommandBarFlyoutEllipsisButtonStyle}"
+            Click="HousesButton_Click">
+            <TextBlock 
+                Text="Houses"
+                Style="{StaticResource TitleTextBlockStyle}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
         </Button>
 
     </Grid>
