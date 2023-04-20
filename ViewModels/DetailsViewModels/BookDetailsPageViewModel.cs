@@ -73,6 +73,11 @@ namespace GoT_Wiki.ViewModels
 
         private async Task<int> FetchPrevious(ObservableCollection<Character> target, string[] source, int currentIndex)
         {
+            if (IsFirstPage(source, currentIndex))
+            {
+                return currentIndex;
+            }
+
             if (currentIndex == source.Length - 1)
             {
                 currentIndex -= currentIndex % _characterNumberPerBatch + _characterNumberPerBatch;
@@ -95,6 +100,13 @@ namespace GoT_Wiki.ViewModels
         {
             collection.Clear();
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, nameof(collection), 0));
+        }
+
+        private bool IsFirstPage(string[] source, int index)
+        {
+            return
+                index == _characterNumberPerBatch - 1 && source.Length >= _characterNumberPerBatch ||
+                index < _characterNumberPerBatch && source.Length < _characterNumberPerBatch && index > 0;
         }
     }
 }
