@@ -21,7 +21,10 @@ namespace GoT_Wiki.Views.DetailsViews
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.GoBack();
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
