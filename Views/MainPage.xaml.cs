@@ -31,7 +31,11 @@ namespace GoT_Wiki.Views
 
         private void SearchBar_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            Frame.Navigate(typeof(SearchResultPage));
+            if (string.IsNullOrEmpty(args.QueryText))
+            {
+                return;
+            }
+            Frame.Navigate(typeof(SearchResultPage), args.QueryText);
         }
     }
 }

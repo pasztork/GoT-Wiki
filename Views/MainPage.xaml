@@ -42,7 +42,7 @@
         <!-- Search bar -->
         <AutoSuggestBox 
             x:Name="SearchBar"
-            PlaceholderText="Enter name and search..."
+            PlaceholderText="Enter a book, character, or house name"
             QueryIcon="Find"
             Grid.Row="1"
             Grid.Column="1"

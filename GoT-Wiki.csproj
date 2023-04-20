@@ -134,6 +134,7 @@
     <Compile Include="ViewModels\ListViewModels\HousesPageViewModel.cs" />
     <Compile Include="ViewModels\ListViewModels\BooksPageViewModel.cs" />
     <Compile Include="ViewModels\ListViewModels\ListViewModelBase.cs" />
+    <Compile Include="ViewModels\SearchResultViewModel.cs" />
     <Compile Include="Views\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>
     </Compile>
