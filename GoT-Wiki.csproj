@@ -134,6 +134,9 @@
     <Compile Include="ViewModels\ListViewModels\HousesPageViewModel.cs" />
     <Compile Include="ViewModels\ListViewModels\BooksPageViewModel.cs" />
     <Compile Include="ViewModels\ListViewModels\ListViewModelBase.cs" />
+    <Compile Include="Views\Converters\CharacterToVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\StringArrayToVisibility.cs" />
+    <Compile Include="Views\Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Views\Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Views\DetailsViews\BookDetailsPage.xaml.cs">
       <DependentUpon>BookDetailsPage.xaml</DependentUpon>

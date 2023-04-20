@@ -36,5 +36,10 @@ namespace GoT_Wiki.ViewModels
         }
 
         protected virtual void OnLoad() { }
+
+        protected void FirePropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
     }
 }

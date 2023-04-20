@@ -1,4 +1,5 @@
 ﻿using GoT_Wiki.Models;
+using GoT_Wiki.Views.DetailsViews;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -78,6 +79,11 @@ namespace GoT_Wiki.Views
         {
             PreviousPovCharactersButton.IsEnabled = true;
             NextPovCharactersButton.IsEnabled = true;
+        }
+
+        private void CharacterList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
         }
     }
 }

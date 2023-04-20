@@ -78,6 +78,7 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
+                    FontWeight="Bold"
                     Text="ISBN" />
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
@@ -89,6 +90,7 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
+                    FontWeight="Bold"
                     Text="Authors" />
                 <ListView
                     ItemsSource="{Binding Item.Authors}"
@@ -132,7 +134,8 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Number of Pages" />
+                    Text="Number of Pages" 
+                    FontWeight="Bold" />
                 <TextBlock 
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Text="{Binding Item.NumberOfPages}" 
@@ -143,7 +146,8 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Publisher" />
+                    Text="Publisher"
+                    FontWeight="Bold" />
                 <TextBlock 
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Text="{Binding Item.Publisher}"
@@ -154,7 +158,8 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Country" />
+                    Text="Country"
+                    FontWeight="Bold" />
                 <TextBlock 
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Text="{Binding Item.Country}"
@@ -165,7 +170,8 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Media Type" />
+                    Text="Media Type" 
+                    FontWeight="Bold" />
                 <TextBlock 
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Text="{Binding Item.MediaType}"
@@ -176,7 +182,8 @@
                 Margin="0, 10, 0, 10">
                 <TextBlock 
                     Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Released" />
+                    Text="Released" 
+                    FontWeight="Bold" />
                 <TextBlock 
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Text="{Binding Item.Released}"
@@ -200,7 +207,8 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Style="{StaticResource BodyTextBlockStyle}"
-                        Text="Characters" />
+                        Text="Characters"
+                        FontWeight="Bold" />
                     <Button
                         x:Name="PreviousCharacterBatchButton"
                         Grid.Row="1"
@@ -233,7 +241,9 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         MinWidth="400"
-                        ItemsSource="{Binding Characters}">
+                        ItemsSource="{Binding Characters}"
+                        ItemClick="CharacterList_ItemClick"
+                        IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock 
@@ -264,7 +274,8 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Style="{StaticResource BodyTextBlockStyle}"
-                        Text="Characters Who Had a POV Chapter" />
+                        Text="Characters Who Had a POV Chapter" 
+                        FontWeight="Bold" />
                     <Button
                         x:Name="PreviousPovCharactersButton"
                         Grid.Row="1"
@@ -297,7 +308,9 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         MinWidth="400"
-                        ItemsSource="{Binding PovCharacters}">
+                        ItemsSource="{Binding PovCharacters}"
+                        ItemClick="CharacterList_ItemClick"
+                        IsItemClickEnabled="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock 

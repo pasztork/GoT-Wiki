@@ -14,12 +14,12 @@ namespace GoT_Wiki.ViewModels
         public ObservableCollection<Character> Characters { get; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> PovCharacters { get; } = new ObservableCollection<Character>();
 
-        public BookDetailsPageViewModel() : base(new BooksService()) { }
-
         private const int _characterNumberPerBatch = 10;
         private int _currentCharacterIndex = 0;
         private int _currentPovCharacterIndex = 0;
         private readonly ServiceBase<Character> _characterService = new CharactersService();
+
+        public BookDetailsPageViewModel() : base(new BooksService()) { }
 
         protected override void OnLoad()
         {
