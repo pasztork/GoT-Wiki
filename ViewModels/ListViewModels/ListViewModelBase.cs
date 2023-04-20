@@ -57,6 +57,11 @@ namespace GoT_Wiki.ViewModels
             {
                 AddCharacterToCollection(element);
             }
+
+            if (Collection.Count == 0)
+            {
+                await FetchPreviousPage();
+            }
         }
 
         private void ClearCollection()
