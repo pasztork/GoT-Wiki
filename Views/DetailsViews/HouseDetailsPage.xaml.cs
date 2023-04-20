@@ -25,7 +25,24 @@ namespace GoT_Wiki.Views.DetailsViews
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var house = e.Parameter as House;
-            ViewModel.Load(house);
+            _ = ViewModel.Load(house);
+        }
+
+        private void House_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            Frame.Navigate(typeof(HouseDetailsPage), button.Tag);
+        }
+
+        private void Character_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            Frame.Navigate(typeof(CharacterDetailsPage), button.Tag);
+        }
+
+        private void HouseList_Click(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(HouseDetailsPage), e.ClickedItem);
         }
     }
 }

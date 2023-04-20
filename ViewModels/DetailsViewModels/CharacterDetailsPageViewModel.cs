@@ -17,11 +17,11 @@ namespace GoT_Wiki.ViewModels
 
         public CharacterDetailsViewModel() : base(new CharactersService()) { }
 
-        protected override void OnLoad()
+        protected override async Task OnLoad()
         {
-            _ = FetchCharacters();
-            _ = FetchHouses();
-            _ = FetchBooks();
+            await FetchCharacters();
+            await FetchHouses();
+            await FetchBooks();
         }
 
         private async Task FetchCharacters()

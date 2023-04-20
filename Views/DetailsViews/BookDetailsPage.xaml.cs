@@ -26,7 +26,7 @@ namespace GoT_Wiki.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var book = e.Parameter as Book;
-            ViewModel.Load(book);
+            _ = ViewModel.Load(book);
         }
 
         private async void NextCharacterBatchButton_Click(object sender, RoutedEventArgs e)

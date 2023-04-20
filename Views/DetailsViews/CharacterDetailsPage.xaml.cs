@@ -27,7 +27,7 @@ namespace GoT_Wiki.Views.DetailsViews
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var character = e.Parameter as Character;
-            ViewModel.Load(character);
+            _ = ViewModel.Load(character);
         }
 
         private void Character_Click(object sender, RoutedEventArgs e)

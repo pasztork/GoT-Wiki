@@ -21,10 +21,10 @@ namespace GoT_Wiki.ViewModels
 
         public BookDetailsPageViewModel() : base(new BooksService()) { }
 
-        protected override void OnLoad()
+        protected override async Task OnLoad()
         {
-            _ = FetchNextBatch();
-            _ = FetchNextPovCharacterBatch();
+            await FetchNextBatch();
+            await FetchNextPovCharacterBatch();
         }
 
 

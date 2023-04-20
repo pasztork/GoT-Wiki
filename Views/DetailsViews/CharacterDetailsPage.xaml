@@ -134,7 +134,7 @@
             </ListViewItem>
             <ListViewItem
                 Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Titles.Length, Converter={StaticResource CountToVisibilityConverter}}">
+                Visibility="{Binding Item.Titles, Converter={StaticResource StringArrayToVisibilityConverter}}">
                 <StackPanel>
                     <TextBlock 
                         Style="{StaticResource BodyTextBlockStyle}"

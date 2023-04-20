@@ -1,6 +1,5 @@
 ﻿namespace GoT_Wiki.Models
 {
-
     public class Character
     {
         public string Url { get; set; }
