@@ -47,5 +47,36 @@ namespace GoT_Wiki.Views.DetailsViews
         {
             Frame.Navigate(typeof(HouseDetailsPage), e.ClickedItem);
         }
+
+        private async void NextCharacterBatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisableCharacterFetchButtons();
+            await ViewModel.FetchNextBatch();
+            EnableCharacterFetchButtons();
+        }
+
+        private async void PreviousCharacterBatchButton_Click(object sender, RoutedEventArgs e)
+        {
+            DisableCharacterFetchButtons();
+            await ViewModel.FetchPreviousBatch();
+            EnableCharacterFetchButtons();
+        }
+
+        private void DisableCharacterFetchButtons()
+        {
+            PreviousCharacterBatchButton.IsEnabled = false;
+            NextCharacterBatchButton.IsEnabled = false;
+        }
+
+        private void EnableCharacterFetchButtons()
+        {
+            PreviousCharacterBatchButton.IsEnabled = true;
+            NextCharacterBatchButton.IsEnabled = true;
+        }
+
+        private void CharacterList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
+        }
     }
 }

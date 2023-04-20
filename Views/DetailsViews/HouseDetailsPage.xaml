@@ -429,6 +429,74 @@
                 </StackPanel>
             </ListViewItem>
 
+            <StackPanel
+                Orientation="Vertical"
+                Margin="0, 10, 0, 10"
+                Visibility="{Binding Item.SwornMembers, Converter={StaticResource StringArrayToVisibilityConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Style="{StaticResource BodyTextBlockStyle}"
+                        Text="Sworn Members"
+                        FontWeight="Bold" />
+                    <Button
+                        x:Name="PreviousCharacterBatchButton"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Width="Auto"
+                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" 
+                        Click="PreviousCharacterBatchButton_Click">
+                        <TextBlock
+                            Text="Previous"
+                            Style="{StaticResource SubtitleTextBlockStyle}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Button>
+
+                    <Button
+                        x:Name="NextCharacterBatchButton"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="Auto"
+                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"
+                        Click="NextCharacterBatchButton_Click">
+                        <TextBlock
+                                Text="Next"
+                                Style="{StaticResource SubtitleTextBlockStyle}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Button>
+                    <ListView
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        MinWidth="400"
+                        ItemsSource="{Binding SwornMembers}"
+                        ItemClick="CharacterList_ItemClick"
+                        IsItemClickEnabled="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding Name}"
+                                    Style="{StaticResource SubtitleTextBlockStyle}"
+                                    VerticalAlignment="Center"
+                                    Margin="20,0,0,0" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </StackPanel>
+
         </ListView>
     </Grid>
 </Page>
