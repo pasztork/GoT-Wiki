@@ -36,8 +36,8 @@ namespace GoT_Wiki.ViewModels
 
         protected override async Task OnLoad()
         {
-            await FetchCharacters();
             await FetchHouses();
+            await FetchCharacters();
         }
 
         private async Task FetchCharacters()
