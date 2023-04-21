@@ -129,7 +129,6 @@
     <Compile Include="ViewModels\DetailsViewModels\DetailsViewModelBase.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SearchResultViewModel.cs" />
-    <Compile Include="Views\Aliases\Aliases.cs" />
     <Compile Include="Views\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>
     </Compile>

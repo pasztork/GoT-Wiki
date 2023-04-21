@@ -1,4 +1,6 @@
-﻿using GoT_Wiki.Views.DetailsViews;
+﻿using GoT_Wiki.Models;
+using GoT_Wiki.ViewModels;
+using GoT_Wiki.Views.DetailsViews;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,22 +13,27 @@ namespace GoT_Wiki.Views
     /// </summary>
     public sealed partial class CharactersPage : Page
     {
+        private readonly ListViewModel<Character> _viewModel = null;
+
         public CharactersPage()
         {
             this.InitializeComponent();
+
+            _viewModel = new ListViewModel<Character>();
+            DataContext = _viewModel;
         }
 
         private async void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
             DisablePaginationButtons();
-            await ViewModel.FetchNextPage();
+            await _viewModel.FetchNextPage();
             EnablePaginationButtons();
         }
 
         private async void PreviousPageButton_Click(object sender, RoutedEventArgs e)
         {
             DisablePaginationButtons();
-            await ViewModel.FetchPreviousPage();
+            await _viewModel.FetchPreviousPage();
             EnablePaginationButtons();
         }
 
