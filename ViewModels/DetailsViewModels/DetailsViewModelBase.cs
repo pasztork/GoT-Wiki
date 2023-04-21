@@ -31,7 +31,7 @@ namespace GoT_Wiki.ViewModels
             await OnLoad();
         }
 
-        protected virtual async Task OnLoad() { }
+        protected abstract Task OnLoad();
 
         protected void FirePropertyChanged(PropertyChangedEventArgs e)
         {
