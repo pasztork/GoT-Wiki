@@ -5,12 +5,12 @@
     xmlns:local="using:GoT_Wiki.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:GoT_Wiki.ViewModels"
+    xmlns:alias="using:GoT_Wiki.Views.Aliases"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.DataContext>
-        <vm:BooksPageViewModel x:Name="ViewModel" />
+        <alias:BookListViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <Grid 

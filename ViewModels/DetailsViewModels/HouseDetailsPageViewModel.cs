@@ -18,6 +18,12 @@ namespace GoT_Wiki.ViewModels
         public ObservableCollection<Character> SwornMembers { get; } = new ObservableCollection<Character>();
         private const int _characterNumberPerBatch = 10;
         private int _currentCharacterIndex = 0;
+
+        public House Overlord { get; set; } = null;
+        public ObservableCollection<House> CadetBranches { get; } = new ObservableCollection<House>();
+
+        private readonly ServiceBase<Character> _charactersService = ServiceBase<Character>.Instance;
+
         private bool IsFirstPage
         {
             get
@@ -27,12 +33,6 @@ namespace GoT_Wiki.ViewModels
                     _currentCharacterIndex < _characterNumberPerBatch && Item.SwornMembers.Length < _characterNumberPerBatch && _currentCharacterIndex > 0;
             }
         }
-
-        public House Overlord { get; set; } = null;
-        public ObservableCollection<House> CadetBranches { get; } = new ObservableCollection<House>();
-        private readonly CharactersService _charactersService = new CharactersService();
-
-        public HouseDetailsPageViewModel() : base(new HousesService()) { }
 
         protected override async Task OnLoad()
         {

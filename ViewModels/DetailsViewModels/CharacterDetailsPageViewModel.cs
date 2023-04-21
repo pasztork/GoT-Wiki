@@ -15,8 +15,6 @@ namespace GoT_Wiki.ViewModels
         public ObservableCollection<Book> Books { get; } = new ObservableCollection<Book>();
         public ObservableCollection<Book> PovBooks { get; } = new ObservableCollection<Book>();
 
-        public CharacterDetailsViewModel() : base(new CharactersService()) { }
-
         protected override async Task OnLoad()
         {
             await FetchCharacters();
@@ -55,7 +53,7 @@ namespace GoT_Wiki.ViewModels
                 return;
             }
 
-            var houseService = new HousesService();
+            var houseService = ServiceBase<House>.Instance;
             foreach (var houseUrl in Item.Allegiances)
             {
                 var house = await houseService.GetAsync(houseUrl);
@@ -76,7 +74,7 @@ namespace GoT_Wiki.ViewModels
                 return;
             }
 
-            var bookService = new BooksService();
+            var bookService = ServiceBase<Book>.Instance;
             foreach (var bookUrl in urls)
             {
                 var book = await bookService.GetAsync(bookUrl);

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GoT_Wiki.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -8,6 +9,39 @@ namespace GoT_Wiki.Services
 {
     public class ServiceBase<TClass>
     {
+        private static ServiceBase<TClass> _instance;
+        public static ServiceBase<TClass> Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new ServiceBase<TClass>();
+                }
+                return _instance;
+            }
+        }
+
+        private static readonly Dictionary<Type, string> _typeToEndpointDictionary = new Dictionary<Type, string>
+        {
+            { typeof(Book), "api/books" },
+            { typeof(Character), "api/characters" },
+            { typeof(House), "api/houses" },
+        };
+
+        private static readonly Dictionary<Type, Action<object>> _typeToActionDictionary = new Dictionary<Type, Action<object>>
+        {
+            { typeof(Book), (obj) => { } },
+            { typeof(Character),
+                (obj) =>
+                {
+                    var item = obj as Character;
+                    item.Name = string.IsNullOrEmpty(item.Name) ? item.Aliases[0] : item.Name;
+                }
+            },
+            { typeof(House), (obj) => { } },
+        };
+
         private readonly Uri _serverUrl = new Uri("https://anapioficeandfire.com");
         private readonly string _apiEndpoint = string.Empty;
         private int _pageSize = 0;
@@ -17,9 +51,12 @@ namespace GoT_Wiki.Services
             set { _pageSize = value; }
         }
 
-        public ServiceBase(string apiEndpoint)
+        private readonly Action<TClass> _process = null;
+
+        private ServiceBase()
         {
-            _apiEndpoint = apiEndpoint;
+            _apiEndpoint = _typeToEndpointDictionary[typeof(TClass)];
+            _process = _typeToActionDictionary[typeof(TClass)] as Action<TClass>;
         }
 
         public async Task<IList<TClass>> GetAsync(int pageNumber)
@@ -36,7 +73,7 @@ namespace GoT_Wiki.Services
                 var response = await client.GetAsync(uri);
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<TClass>(json);
-                Process(result);
+                _process(result);
             }
             return result;
         }
@@ -46,8 +83,6 @@ namespace GoT_Wiki.Services
             var uri = new Uri(url);
             return await GetAsync(uri);
         }
-
-        protected virtual void Process(TClass item) { }
 
         public async Task<IList<TClass>> GetByNameAsync(string name)
         {
@@ -65,7 +100,7 @@ namespace GoT_Wiki.Services
                 result = JsonConvert.DeserializeObject<IList<TClass>>(json);
                 foreach (var item in result)
                 {
-                    Process(item);
+                    _process(item);
                 }
             }
             return result;

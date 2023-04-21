@@ -17,16 +17,13 @@ namespace GoT_Wiki.ViewModels
         private const int _characterNumberPerBatch = 10;
         private int _currentCharacterIndex = 0;
         private int _currentPovCharacterIndex = 0;
-        private readonly ServiceBase<Character> _characterService = new CharactersService();
-
-        public BookDetailsPageViewModel() : base(new BooksService()) { }
+        private readonly ServiceBase<Character> _characterService = ServiceBase<Character>.Instance;
 
         protected override async Task OnLoad()
         {
             await FetchNextBatch();
             await FetchNextPovCharacterBatch();
         }
-
 
         public async Task FetchNextBatch()
         {
