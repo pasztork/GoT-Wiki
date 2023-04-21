@@ -122,12 +122,12 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\House.cs" />
-    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\Service.cs" />
     <Compile Include="ViewModels\DetailsViewModels\HouseDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\DetailsViewModels\CharacterDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\DetailsViewModels\BookDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\DetailsViewModels\DetailsViewModelBase.cs" />
-    <Compile Include="ViewModels\ListViewModels\ListViewModelBase.cs" />
+    <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\SearchResultViewModel.cs" />
     <Compile Include="Views\Aliases\Aliases.cs" />
     <Compile Include="Views\SearchResultPage.xaml.cs">

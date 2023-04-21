@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.ViewModels
 {
-    public class ListViewModelBase<TClass> : INotifyCollectionChanged
+    public class ListViewModel<TClass> : INotifyCollectionChanged
     {
-        private static ListViewModelBase<TClass> _instance;
-        public static ListViewModelBase<TClass> Instance
+        private static ListViewModel<TClass> _instance;
+        public static ListViewModel<TClass> Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ListViewModelBase<TClass>();
+                    _instance = new ListViewModel<TClass>();
                 }
                 return _instance;
             }
@@ -26,9 +26,9 @@ namespace GoT_Wiki.ViewModels
 
         private static int _pageNumber = 1;
         private static readonly int _pageSize = 10;
-        private readonly ServiceBase<TClass> _service = ServiceBase<TClass>.Instance;
+        private readonly Service<TClass> _service = Service<TClass>.Instance;
 
-        public ListViewModelBase()
+        public ListViewModel()
         {
             _service.PageSize = _pageSize;
             _ = InitTask();

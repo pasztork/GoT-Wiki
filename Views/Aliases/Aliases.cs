@@ -1,6 +1,6 @@
 ﻿namespace GoT_Wiki.Views.Aliases
 {
-    public class BookListViewModel : ViewModels.ListViewModelBase<Models.Book> { }
-    public class CharacterListViewModel : ViewModels.ListViewModelBase<Models.Character> { }
-    public class HouseListViewModel : ViewModels.ListViewModelBase<Models.House> { }
+    public class BookListViewModel : ViewModels.ListViewModel<Models.Book> { }
+    public class CharacterListViewModel : ViewModels.ListViewModel<Models.Character> { }
+    public class HouseListViewModel : ViewModels.ListViewModel<Models.House> { }
 }

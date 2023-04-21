@@ -23,7 +23,7 @@ namespace GoT_Wiki.ViewModels
             }
         }
 
-        protected readonly ServiceBase<TClass> service = ServiceBase<TClass>.Instance;
+        protected readonly Service<TClass> service = Service<TClass>.Instance;
 
         public async Task Load(TClass elemenet)
         {

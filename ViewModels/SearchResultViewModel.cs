@@ -11,9 +11,9 @@ namespace GoT_Wiki.ViewModels
         public ObservableCollection<Character> Characters { get; } = new ObservableCollection<Character>();
         public ObservableCollection<House> Houses { get; } = new ObservableCollection<House>();
 
-        private readonly ServiceBase<Book> _booksService = ServiceBase<Book>.Instance;
-        private readonly ServiceBase<Character> _charactersService = ServiceBase<Character>.Instance;
-        private readonly ServiceBase<House> _housesService = ServiceBase<House>.Instance;
+        private readonly Service<Book> _booksService = Service<Book>.Instance;
+        private readonly Service<Character> _charactersService = Service<Character>.Instance;
+        private readonly Service<House> _housesService = Service<House>.Instance;
         private string _query = string.Empty;
 
         public async Task Load(string queryString)
@@ -24,7 +24,7 @@ namespace GoT_Wiki.ViewModels
             await Load(_housesService, Houses);
         }
 
-        private async Task Load<TClass>(ServiceBase<TClass> service, ObservableCollection<TClass> collection)
+        private async Task Load<TClass>(Service<TClass> service, ObservableCollection<TClass> collection)
         {
             var result = await service.GetByNameAsync(_query);
             foreach (var item in result)

@@ -53,7 +53,7 @@ namespace GoT_Wiki.ViewModels
                 return;
             }
 
-            var houseService = ServiceBase<House>.Instance;
+            var houseService = Service<House>.Instance;
             foreach (var houseUrl in Item.Allegiances)
             {
                 var house = await houseService.GetAsync(houseUrl);
@@ -74,7 +74,7 @@ namespace GoT_Wiki.ViewModels
                 return;
             }
 
-            var bookService = ServiceBase<Book>.Instance;
+            var bookService = Service<Book>.Instance;
             foreach (var bookUrl in urls)
             {
                 var book = await bookService.GetAsync(bookUrl);

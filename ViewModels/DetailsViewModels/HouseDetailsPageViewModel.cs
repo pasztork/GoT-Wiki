@@ -22,7 +22,7 @@ namespace GoT_Wiki.ViewModels
         public House Overlord { get; set; } = null;
         public ObservableCollection<House> CadetBranches { get; } = new ObservableCollection<House>();
 
-        private readonly ServiceBase<Character> _charactersService = ServiceBase<Character>.Instance;
+        private readonly Service<Character> _charactersService = Service<Character>.Instance;
 
         private bool IsFirstPage
         {

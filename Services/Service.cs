@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.Services
 {
-    public class ServiceBase<TClass>
+    public class Service<TClass>
     {
-        private static ServiceBase<TClass> _instance;
-        public static ServiceBase<TClass> Instance
+        private static Service<TClass> _instance;
+        public static Service<TClass> Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new ServiceBase<TClass>();
+                    _instance = new Service<TClass>();
                 }
                 return _instance;
             }
@@ -53,7 +53,7 @@ namespace GoT_Wiki.Services
 
         private readonly Action<TClass> _process = null;
 
-        private ServiceBase()
+        private Service()
         {
             _apiEndpoint = _typeToEndpointDictionary[typeof(TClass)];
             _process = _typeToActionDictionary[typeof(TClass)] as Action<TClass>;

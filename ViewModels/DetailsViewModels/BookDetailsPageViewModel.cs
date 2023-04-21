@@ -17,7 +17,7 @@ namespace GoT_Wiki.ViewModels
         private const int _characterNumberPerBatch = 10;
         private int _currentCharacterIndex = 0;
         private int _currentPovCharacterIndex = 0;
-        private readonly ServiceBase<Character> _characterService = ServiceBase<Character>.Instance;
+        private readonly Service<Character> _characterService = Service<Character>.Instance;
 
         protected override async Task OnLoad()
         {
