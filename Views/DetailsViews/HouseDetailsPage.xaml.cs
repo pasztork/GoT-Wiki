@@ -19,7 +19,7 @@ namespace GoT_Wiki.Views.DetailsViews
             _ = ViewModel.Load(house);
         }
 
-        private void BackButtonClickedEventHandler(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
             {
@@ -27,31 +27,31 @@ namespace GoT_Wiki.Views.DetailsViews
             }
         }
 
-        private void CharacterTappedEventHandler(object sender, TappedRoutedEventArgs e)
+        private void CharacterTapped(object sender, TappedRoutedEventArgs e)
         {
             var listViewItem = sender as ListViewItem;
             Frame.Navigate(typeof(CharacterDetailsPage), listViewItem.Tag);
         }
 
-        private void HouseTappedEventHandler(object sender, TappedRoutedEventArgs e)
+        private void HouseTapped(object sender, TappedRoutedEventArgs e)
         {
             var listViewItem = sender as ListViewItem;
             Frame.Navigate(typeof(HouseDetailsPage), listViewItem.Tag);
         }
 
-        private void HouseListItemClickedEventHandler(object sender, ItemClickEventArgs e)
+        private void HouseListItemClicked(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(HouseDetailsPage), e.ClickedItem);
         }
 
-        private async void PreviousCharacterBatchButtonClickedEventHandler(object sender, RoutedEventArgs e)
+        private async void PreviousCharacterBatchButtonClicked(object sender, RoutedEventArgs e)
         {
             DisableCharacterFetchButtons();
             await ViewModel.FetchPreviousBatch();
             EnableCharacterFetchButtons();
         }
 
-        private async void NextCharacterBatchButtonClickedEventHandler(object sender, RoutedEventArgs e)
+        private async void NextCharacterBatchButtonClicked(object sender, RoutedEventArgs e)
         {
             DisableCharacterFetchButtons();
             await ViewModel.FetchNextBatch();
@@ -70,7 +70,7 @@ namespace GoT_Wiki.Views.DetailsViews
             NextCharacterBatchButton.IsEnabled = true;
         }
 
-        private void CharacterListItemClickedEventHandler(object sender, ItemClickEventArgs e)
+        private void CharacterListItemClicked(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
         }

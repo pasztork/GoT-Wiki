@@ -1,328 +1,345 @@
 ﻿<Page
-    x:Class="GoT_Wiki.Views.BookDetailsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GoT_Wiki.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:GoT_Wiki.ViewModels"
-    xmlns:conv="using:GoT_Wiki.Views.Converters"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  x:Class='GoT_Wiki.Views.BookDetailsPage'
+  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+  xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+  xmlns:d='http://schemas.microsoft.com/expression/blend/2008'
+  xmlns:mc='http://schemas.openxmlformats.org/markup-compatibility/2006'
+  xmlns:vm='using:GoT_Wiki.ViewModels'
+  xmlns:conv='using:GoT_Wiki.Views.Converters'
+  mc:Ignorable='d'
+  Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'>
 
-    <Page.Resources>
-        <conv:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
-    </Page.Resources>
+  <Page.Resources>
+    <conv:CountToVisibilityConverter x:Key='CountToVisibilityConverter' />
+  </Page.Resources>
 
-    <Page.DataContext>
-        <vm:BookDetailsPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+  <Page.DataContext>
+    <vm:BookDetailsPageViewModel x:Name='ViewModel' />
+  </Page.DataContext>
 
-    <Grid 
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+  <Grid 
+    Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'
+    HorizontalAlignment='Stretch'
+    VerticalAlignment='Stretch'>
 
-        <!-- Grid size -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <!-- Grid size -->
+    <Grid.RowDefinitions>
+      <RowDefinition Height='Auto'/>
+      <RowDefinition Height='*'/>
+    </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width='Auto'/>
+      <ColumnDefinition Width='*'/>
+    </Grid.ColumnDefinitions>
 
-        <!-- Page header -->
-        <Grid
-            Grid.Row="0"
-            Grid.Column="0"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Right"
-            MinWidth="300">
+    <!-- Page header -->
+    <Grid
+      Grid.Row='0'
+      Grid.Column='0'
+      VerticalAlignment='Stretch'
+      HorizontalAlignment='Right'
+      MinWidth='300'>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width='70'/>
+        <ColumnDefinition Width='*'/>
+      </Grid.ColumnDefinitions>
 
-            <Button 
-                x:Name="BackButton"
-                Grid.Column="0"
-                Height="Auto"
-                Width="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Style="{StaticResource NavigationBackButtonNormalStyle}"    
-                Click="BackButton_Click" />
+      <Button 
+        x:Name='BackButton'
+        Grid.Column='0'
+        Height='Auto'
+        Width='Auto'
+        VerticalAlignment='Stretch'
+        HorizontalAlignment='Stretch'
+        Style='{StaticResource NavigationBackButtonNormalStyle}'    
+        Click='BackButtonClicked' />
 
-            <TextBlock 
-                Text="{Binding Item.Name}"
-                Style="{StaticResource HeaderTextBlockStyle}"
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Margin="20,20,0,20"/>
+      <TextBlock 
+        Text='{Binding Item.Name}'
+        Style='{StaticResource HeaderTextBlockStyle}'
+        Grid.Column='1'
+        VerticalAlignment='Center'
+        HorizontalAlignment='Left'
+        Margin='20,20,0,20'/>
+    </Grid>
+
+    <!-- Actual details -->
+    <ListView
+      Grid.Row='1'
+      Grid.Column='0'
+      Grid.ColumnSpan='2'
+      IsItemClickEnabled='False'
+      SelectionMode='None'>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          FontWeight='Bold'
+          Text='ISBN' />
+        <TextBlock
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.Isbn}' 
+          Margin='20,0,0,0' />
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          FontWeight='Bold'
+          Text='Authors' />
+        <ListView
+          ItemsSource='{Binding Item.Authors}'
+          IsItemClickEnabled='False'>
+          <ListView.ItemContainerStyle>
+            <Style TargetType='ListViewItem'>
+              <Setter
+                Property='HorizontalContentAlignment'
+                Value='Stretch' />
+              <Setter
+                Property='VerticalContentAlignment'
+                Value='Stretch' />
+              <Setter
+                Property='Background'
+                Value='Transparent' />
+              <Setter Property='Template'>
+                <Setter.Value>
+                  <ControlTemplate TargetType='ListViewItem'>
+                    <ContentPresenter />
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </ListView.ItemContainerStyle>
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <TextBlock 
+                Text='{Binding}'
+                Style='{StaticResource SubtitleTextBlockStyle}'
+                VerticalAlignment='Center'
+                Margin='20,0,0,0' />
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          Text='Number of Pages' 
+          FontWeight='Bold' />
+        <TextBlock 
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.NumberOfPages}' 
+          Margin='20,0,0,0' />
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          Text='Publisher'
+          FontWeight='Bold' />
+        <TextBlock 
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.Publisher}'
+          Margin='20,0,0,0'/>
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          Text='Country'
+          FontWeight='Bold' />
+        <TextBlock 
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.Country}'
+          Margin='20,0,0,0' />
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          Text='Media Type' 
+          FontWeight='Bold' />
+        <TextBlock 
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.MediaType}'
+          Margin='20,0,0,0' />
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'>
+        <TextBlock 
+          Style='{StaticResource BodyTextBlockStyle}'
+          Text='Released' 
+          FontWeight='Bold' />
+        <TextBlock 
+          Style='{StaticResource SubtitleTextBlockStyle}'
+          Text='{Binding Item.Released}'
+          Margin='20,0,0,0' />
+      </StackPanel>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'
+        Visibility='{Binding Characters.Count, Converter={StaticResource CountToVisibilityConverter}}'>
+
+        <Grid>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='*'/>
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width='*'/>
+            <ColumnDefinition Width='*'/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock 
+            Grid.Row='0'
+            Grid.Column='0'
+            Style='{StaticResource BodyTextBlockStyle}'
+            Text='Characters'
+            FontWeight='Bold' />
+          <Button
+            x:Name='PreviousCharacterBatchButton'
+            Grid.Row='1'
+            Grid.Column='0'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}' 
+            Click='PreviousCharacterBatchButtonClicked'>
+            <TextBlock
+              Text='Previous'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+
+          <Button
+            x:Name='NextCharacterBatchButton'
+            Grid.Row='1'
+            Grid.Column='1'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}'
+            Click='NextCharacterBatchButtonClicked'>
+            <TextBlock
+              Text='Next'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+
+          <ListView
+            Grid.Row='2'
+            Grid.Column='0'
+            Grid.ColumnSpan='2'
+            MinWidth='400'
+            ItemsSource='{Binding Characters}'
+            ItemClick='CharacterListItemClicked'
+            IsItemClickEnabled='True'>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
         </Grid>
 
-        <!-- Actual details -->
-        <ListView
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            IsItemClickEnabled="False"
-            SelectionMode="None">
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    FontWeight="Bold"
-                    Text="ISBN" />
-                <TextBlock
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.Isbn}" 
-                    Margin="20,0,0,0" />
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    FontWeight="Bold"
-                    Text="Authors" />
-                <ListView
-                    ItemsSource="{Binding Item.Authors}"
-                    IsItemClickEnabled="False">
-                    <ListView.ItemContainerStyle>
-                        <Style 
-                            TargetType="ListViewItem">
-                            <Setter
-                                Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                            <Setter
-                                Property="VerticalContentAlignment"
-                                Value="Stretch" />
-                            <Setter
-                                Property="Background"
-                                Value="Transparent" />
-                            <Setter
-                                Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate
-                                        TargetType="ListViewItem">
-                                        <ContentPresenter />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock 
-                                Text="{Binding}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Number of Pages" 
-                    FontWeight="Bold" />
-                <TextBlock 
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.NumberOfPages}" 
-                    Margin="20,0,0,0" />
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Publisher"
-                    FontWeight="Bold" />
-                <TextBlock 
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.Publisher}"
-                    Margin="20,0,0,0"/>
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Country"
-                    FontWeight="Bold" />
-                <TextBlock 
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.Country}"
-                    Margin="20,0,0,0" />
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Media Type" 
-                    FontWeight="Bold" />
-                <TextBlock 
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.MediaType}"
-                    Margin="20,0,0,0" />
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10">
-                <TextBlock 
-                    Style="{StaticResource BodyTextBlockStyle}"
-                    Text="Released" 
-                    FontWeight="Bold" />
-                <TextBlock 
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="{Binding Item.Released}"
-                    Margin="20,0,0,0" />
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Characters.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        Text="Characters"
-                        FontWeight="Bold" />
-                    <Button
-                        x:Name="PreviousCharacterBatchButton"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" 
-                        Click="PreviousCharacterBatchButton_Click">
-                        <TextBlock
-                            Text="Previous"
-                            Style="{StaticResource SubtitleTextBlockStyle}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"/>
-                    </Button>
+      </StackPanel>
 
-                    <Button
-                        x:Name="NextCharacterBatchButton"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"
-                        Click="NextCharacterBatchButton_Click">
-                        <TextBlock
-                                Text="Next"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                    </Button>
-                    <ListView
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        MinWidth="400"
-                        ItemsSource="{Binding Characters}"
-                        ItemClick="CharacterList_ItemClick"
-                        IsItemClickEnabled="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding Name}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </StackPanel>
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding PovCharacters.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        Text="Characters Who Had a POV Chapter" 
-                        FontWeight="Bold" />
-                    <Button
-                        x:Name="PreviousPovCharactersButton"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" 
-                        Click="PreviousPovCharactersButton_Click">
-                        <TextBlock
-                            Text="Previous"
-                            Style="{StaticResource SubtitleTextBlockStyle}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"/>
-                    </Button>
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'
+        Visibility='{Binding PovCharacters.Count, Converter={StaticResource CountToVisibilityConverter}}'>
 
-                    <Button
-                        x:Name="NextPovCharactersButton"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"
-                        Click="NextPovCharactersButton_Click">
-                        <TextBlock
-                                Text="Next"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                    </Button>
-                    <ListView
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        MinWidth="400"
-                        ItemsSource="{Binding PovCharacters}"
-                        ItemClick="CharacterList_ItemClick"
-                        IsItemClickEnabled="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding Name}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </StackPanel>
-        </ListView>
-    </Grid>
+        <Grid>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='*'/>
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width='*'/>
+            <ColumnDefinition Width='*'/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock 
+            Grid.Row='0'
+            Grid.Column='0'
+            Style='{StaticResource BodyTextBlockStyle}'
+            Text='Characters Who Had a POV Chapter' 
+            FontWeight='Bold' />
+          <Button
+            x:Name='PreviousPovCharactersButton'
+            Grid.Row='1'
+            Grid.Column='0'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}' 
+            Click='PreviousPovCharactersButtonClicked'>
+            <TextBlock
+              Text='Previous'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+
+          <Button
+            x:Name='NextPovCharactersButton'
+            Grid.Row='1'
+            Grid.Column='1'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}'
+            Click='NextPovCharactersButtonClicked'>
+            <TextBlock
+              Text='Next'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+          <ListView
+            Grid.Row='2'
+            Grid.Column='0'
+            Grid.ColumnSpan='2'
+            MinWidth='400'
+            ItemsSource='{Binding PovCharacters}'
+            ItemClick='CharacterListItemClicked'
+            IsItemClickEnabled='True'>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+
+        </Grid>
+      </StackPanel>
+
+    </ListView>
+  </Grid>
 </Page>

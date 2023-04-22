@@ -1,98 +1,98 @@
 ﻿<Page
-  x:Class="GoT_Wiki.Views.SearchResultPage"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:vm="using:GoT_Wiki.ViewModels"
-  xmlns:conv="using:GoT_Wiki.Views.Converters"
-  mc:Ignorable="d"
-  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  x:Class='GoT_Wiki.Views.SearchResultPage'
+  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+  xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+  xmlns:d='http://schemas.microsoft.com/expression/blend/2008'
+  xmlns:mc='http://schemas.openxmlformats.org/markup-compatibility/2006'
+  xmlns:vm='using:GoT_Wiki.ViewModels'
+  xmlns:conv='using:GoT_Wiki.Views.Converters'
+  mc:Ignorable='d'
+  Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'>
 
   <Page.DataContext>
-    <vm:SearchResultViewModel x:Name="ViewModel" />
+    <vm:SearchResultViewModel x:Name='ViewModel' />
   </Page.DataContext>
 
   <Page.Resources>
-    <conv:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
+    <conv:CountToVisibilityConverter x:Key='CountToVisibilityConverter' />
   </Page.Resources>
 
   <Grid 
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    HorizontalAlignment="Stretch"
-    VerticalAlignment="Stretch">
+    Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'
+    HorizontalAlignment='Stretch'
+    VerticalAlignment='Stretch'>
 
     <!-- Grid size -->
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
+      <RowDefinition Height='Auto'/>
+      <RowDefinition Height='*'/>
     </Grid.RowDefinitions>
 
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width='Auto'/>
+      <ColumnDefinition Width='*'/>
     </Grid.ColumnDefinitions>
 
     <!-- Page header -->
     <Grid
-      Grid.Row="0"
-      Grid.Column="0"
-      VerticalAlignment="Stretch"
-      HorizontalAlignment="Right"
-      MinWidth="300">
+      Grid.Row='0'
+      Grid.Column='0'
+      VerticalAlignment='Stretch'
+      HorizontalAlignment='Right'
+      MinWidth='300'>
 
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="70"/>
-        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width='70'/>
+        <ColumnDefinition Width='*'/>
       </Grid.ColumnDefinitions>
 
       <Button 
-        Grid.Column="0"
-        Height="Auto"
-        Width="Auto"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        Style="{StaticResource NavigationBackButtonNormalStyle}"    
-        Click="BackButtonClicked" />
+        Grid.Column='0'
+        Height='Auto'
+        Width='Auto'
+        VerticalAlignment='Stretch'
+        HorizontalAlignment='Stretch'
+        Style='{StaticResource NavigationBackButtonNormalStyle}'    
+        Click='BackButtonClicked' />
 
       <TextBlock 
-        Text="Search Results"
-        Style="{StaticResource HeaderTextBlockStyle}"
-        Grid.Column="1"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Left"
-        Margin="20,20,0,20"/>
+        Text='Search Results'
+        Style='{StaticResource HeaderTextBlockStyle}'
+        Grid.Column='1'
+        VerticalAlignment='Center'
+        HorizontalAlignment='Left'
+        Margin='20,20,0,20'/>
 
     </Grid>
 
     <!-- Search results -->
     <ListView
-      Grid.Row="1"
-      Grid.Column="0"
-      Grid.ColumnSpan="2"
-      IsItemClickEnabled="False"
-      SelectionMode="None">
+      Grid.Row='1'
+      Grid.Column='0'
+      Grid.ColumnSpan='2'
+      IsItemClickEnabled='False'
+      SelectionMode='None'>
 
       <ListViewItem
-        Margin="0,10,0,10"
-        Visibility="{Binding Books.Count, Converter={StaticResource CountToVisibilityConverter}}">
+        Margin='0,10,0,10'
+        Visibility='{Binding Books.Count, Converter={StaticResource CountToVisibilityConverter}}'>
         <StackPanel>
           <TextBlock 
-            Style="{StaticResource BodyTextBlockStyle}"
-            FontWeight="Bold"
-            Text="Books" />
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Books' />
           <ListView
-            ItemsSource="{Binding Books}"
-            Width="500"
-            IsItemClickEnabled="True"
-            ItemClick="BookListItemClicked">
+            ItemsSource='{Binding Books}'
+            Width='500'
+            IsItemClickEnabled='True'
+            ItemClick='BookListItemClicked'>
             <ListView.ItemTemplate>
               <DataTemplate>
                 <TextBlock 
-                  Text="{Binding Name}"
-                  Style="{StaticResource SubtitleTextBlockStyle}"
-                  VerticalAlignment="Center"
-                  Margin="20,0,0,0" />
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
@@ -100,25 +100,25 @@
       </ListViewItem>
 
       <ListViewItem
-        Margin="0,10,0,10"
-        Visibility="{Binding Characters.Count, Converter={StaticResource CountToVisibilityConverter}}">
+        Margin='0,10,0,10'
+        Visibility='{Binding Characters.Count, Converter={StaticResource CountToVisibilityConverter}}'>
         <StackPanel>
           <TextBlock 
-            Style="{StaticResource BodyTextBlockStyle}"
-            FontWeight="Bold"
-            Text="Characters" />
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Characters' />
           <ListView
-            ItemsSource="{Binding Characters}"
-            Width="500"
-            IsItemClickEnabled="True"
-            ItemClick="CharacterListItemClicked">
+            ItemsSource='{Binding Characters}'
+            Width='500'
+            IsItemClickEnabled='True'
+            ItemClick='CharacterListItemClicked'>
             <ListView.ItemTemplate>
               <DataTemplate>
                 <TextBlock 
-                  Text="{Binding Name}"
-                  Style="{StaticResource SubtitleTextBlockStyle}"
-                  VerticalAlignment="Center"
-                  Margin="20,0,0,0" />
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
@@ -126,25 +126,25 @@
       </ListViewItem>
 
       <ListViewItem
-        Margin="0,10,0,10"
-        Visibility="{Binding Houses.Count, Converter={StaticResource CountToVisibilityConverter}}">
+        Margin='0,10,0,10'
+        Visibility='{Binding Houses.Count, Converter={StaticResource CountToVisibilityConverter}}'>
         <StackPanel>
           <TextBlock 
-            Style="{StaticResource BodyTextBlockStyle}"
-            FontWeight="Bold"
-            Text="Houses" />
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Houses' />
           <ListView
-            ItemsSource="{Binding Houses}"
-            Width="500"
-            IsItemClickEnabled="True"
-            ItemClick="HouseListItemClicked">
+            ItemsSource='{Binding Houses}'
+            Width='500'
+            IsItemClickEnabled='True'
+            ItemClick='HouseListItemClicked'>
             <ListView.ItemTemplate>
               <DataTemplate>
                 <TextBlock 
-                  Text="{Binding Name}"
-                  Style="{StaticResource SubtitleTextBlockStyle}"
-                  VerticalAlignment="Center"
-                  Margin="20,0,0,0" />
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>

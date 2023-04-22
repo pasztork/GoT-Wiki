@@ -1,25 +1,19 @@
 ﻿using GoT_Wiki.Models;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace GoT_Wiki.Views.DetailsViews
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CharacterDetailsPage : Page
     {
         public CharacterDetailsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
             {
@@ -33,26 +27,20 @@ namespace GoT_Wiki.Views.DetailsViews
             _ = ViewModel.Load(character);
         }
 
-        private void Character_Click(object sender, RoutedEventArgs e)
+        private void CharacterTapped(object sender, TappedRoutedEventArgs e)
         {
-            var button = sender as Button;
-            Frame.Navigate(typeof(CharacterDetailsPage), button.Tag);
+            var listViewItem = sender as ListViewItem;
+            Frame.Navigate(typeof(CharacterDetailsPage), listViewItem.Tag);
         }
 
-        private void AllegiancesList_ItemClick(object sender, ItemClickEventArgs e)
+        private void AllegianceListItemClicked(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(HouseDetailsPage), e.ClickedItem);
         }
 
-        private void Book_ItemClick(object sender, ItemClickEventArgs e)
+        private void BookListItemClicked(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(BookDetailsPage), e.ClickedItem);
-        }
-
-        private void Button_Hovered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            var button = sender as Button;
-            button.Background = new SolidColorBrush(Colors.Transparent);
         }
     }
 }

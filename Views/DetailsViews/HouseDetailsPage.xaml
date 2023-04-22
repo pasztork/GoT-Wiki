@@ -57,7 +57,7 @@
         VerticalAlignment='Stretch'
         HorizontalAlignment='Stretch'
         Style='{StaticResource NavigationBackButtonNormalStyle}'    
-        Click='BackButtonClickedEventHandler' />
+        Click='BackButtonClicked' />
 
       <TextBlock 
         Text='{Binding Item.Name}'
@@ -217,7 +217,7 @@
             FontWeight='Bold'
             Text='Current Lord' />
           <ListViewItem
-            Tapped='CharacterTappedEventHandler'
+            Tapped='CharacterTapped'
             Tag='{Binding CurrentLord}'
             Width='500'>
             <TextBlock
@@ -239,7 +239,7 @@
             FontWeight='Bold'
             Text='Heir' />
           <ListViewItem
-            Tapped='CharacterTappedEventHandler'
+            Tapped='CharacterTapped'
             Tag='{Binding Heir}'
             Width='500'>
             <TextBlock
@@ -261,7 +261,7 @@
             FontWeight='Bold'
             Text='Overlord' />
           <ListViewItem
-            Tapped='HouseTappedEventHandler'
+            Tapped='HouseTapped'
             Tag='{Binding Overlord}'
             Width='500'>
             <TextBlock
@@ -298,7 +298,7 @@
             FontWeight='Bold'
             Text='Founder' />
           <ListViewItem
-            Tapped='CharacterTappedEventHandler'
+            Tapped='CharacterTapped'
             Tag='{Binding Founder}'
             Width='500'>
             <TextBlock
@@ -382,7 +382,7 @@
             ItemsSource='{Binding CadetBranches}'
             Width='500'
             IsItemClickEnabled='True'
-            ItemClick='HouseListItemClickedEventHandler'>
+            ItemClick='HouseListItemClicked'>
             <ListView.ItemTemplate>
               <DataTemplate>
                 <TextBlock 
@@ -424,7 +424,7 @@
             Grid.Column='0'
             Width='Auto'
             Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}' 
-            Click='PreviousCharacterBatchButtonClickedEventHandler'>
+            Click='PreviousCharacterBatchButtonClicked'>
             <TextBlock
               Text='Previous'
               Style='{StaticResource SubtitleTextBlockStyle}'
@@ -438,7 +438,7 @@
             Grid.Column='1'
             Width='Auto'
             Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}'
-            Click='NextCharacterBatchButtonClickedEventHandler'>
+            Click='NextCharacterBatchButtonClicked'>
             <TextBlock
               Text='Next'
               Style='{StaticResource SubtitleTextBlockStyle}'
@@ -452,7 +452,7 @@
             Grid.ColumnSpan='2'
             MinWidth='400'
             ItemsSource='{Binding SwornMembers}'
-            ItemClick='CharacterListItemClickedEventHandler'
+            ItemClick='CharacterListItemClicked'
             IsItemClickEnabled='True'>
             <ListView.ItemTemplate>
               <DataTemplate>
