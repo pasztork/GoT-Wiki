@@ -1,502 +1,472 @@
 ﻿<Page
-    x:Class="GoT_Wiki.Views.DetailsViews.HouseDetailsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GoT_Wiki.Views.DetailsViews"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:GoT_Wiki.Views.Converters"
-    xmlns:vm="using:GoT_Wiki.ViewModels"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    x:Class='GoT_Wiki.Views.DetailsViews.HouseDetailsPage'
+    xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'
+    xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'
+    xmlns:d='http://schemas.microsoft.com/expression/blend/2008'
+    xmlns:mc='http://schemas.openxmlformats.org/markup-compatibility/2006'
+    xmlns:conv='using:GoT_Wiki.Views.Converters'
+    xmlns:vm='using:GoT_Wiki.ViewModels'
+    mc:Ignorable='d'
+    Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'>
 
-    <Page.DataContext>
-        <vm:HouseDetailsPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+  <Page.DataContext>
+    <vm:HouseDetailsPageViewModel x:Name='ViewModel' />
+  </Page.DataContext>
 
-    <Page.Resources>
-        <conv:CharacterToVisibilityConverter x:Key="CharacterToVisibilityConverter" />
-        <conv:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
-        <conv:StringArrayToVisibility x:Key="StringArrayToVisibilityConverter" />
-        <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
-    </Page.Resources>
+  <Page.Resources>
+    <conv:CharacterToVisibilityConverter x:Key='CharacterToVisibilityConverter' />
+    <conv:CountToVisibilityConverter x:Key='CountToVisibilityConverter' />
+    <conv:StringArrayToVisibility x:Key='StringArrayToVisibilityConverter' />
+    <conv:StringToVisibilityConverter x:Key='StringToVisibilityConverter' />
+  </Page.Resources>
 
-    <Grid 
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">
+  <Grid 
+    Background='{ThemeResource ApplicationPageBackgroundThemeBrush}'
+    HorizontalAlignment='Stretch'
+    VerticalAlignment='Stretch'>
 
-        <!-- Grid size -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <!-- Grid size -->
+    <Grid.RowDefinitions>
+      <RowDefinition Height='Auto'/>
+      <RowDefinition Height='*'/>
+    </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width='Auto'/>
+      <ColumnDefinition Width='*'/>
+    </Grid.ColumnDefinitions>
 
-        <!-- Page header -->
-        <Grid
-            Grid.Row="0"
-            Grid.Column="0"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Right"
-            MinWidth="300">
+    <!-- Page header -->
+    <Grid
+      Grid.Row='0'
+      Grid.Column='0'
+      VerticalAlignment='Stretch'
+      HorizontalAlignment='Right'
+      MinWidth='300'>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width='70'/>
+        <ColumnDefinition Width='*'/>
+      </Grid.ColumnDefinitions>
 
-            <Button 
-                x:Name="BackButton"
-                Grid.Column="0"
-                Height="Auto"
-                Width="Auto"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Style="{StaticResource NavigationBackButtonNormalStyle}"    
-                Click="BackButton_Click" />
+      <Button 
+        x:Name='BackButton'
+        Grid.Column='0'
+        Height='Auto'
+        Width='Auto'
+        VerticalAlignment='Stretch'
+        HorizontalAlignment='Stretch'
+        Style='{StaticResource NavigationBackButtonNormalStyle}'    
+        Click='BackButtonClickedEventHandler' />
 
-            <TextBlock 
-                Text="{Binding Item.Name}"
-                Style="{StaticResource HeaderTextBlockStyle}"
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Margin="20,20,0,20"/>
-        </Grid>
-
-        <!-- Actual details -->
-        <ListView
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            IsItemClickEnabled="False"
-            SelectionMode="None">
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Region, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Region" />
-                    <TextBlock
-                        Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="{Binding Item.Region}" 
-                        Margin="20,0,0,0" />
-                </StackPanel>
-            </ListViewItem>
-            <ListViewItem
-                Margin="0,10,0,10"
-                Visibility="{Binding Item.CoatOfArms, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Coat of Arms" />
-                    <TextBlock
-                        Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="{Binding Item.CoatOfArms}" 
-                        Margin="20,0,0,0" />
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Words, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Words" />
-                    <TextBlock
-                        Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="{Binding Item.Words}" 
-                        Margin="20,0,0,0" />
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Titles, Converter={StaticResource StringArrayToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Titles" />
-                    <ListView
-                        ItemsSource="{Binding Item.Titles}"
-                        IsItemClickEnabled="False">
-                        <ListView.ItemContainerStyle>
-                            <Style 
-                                TargetType="ListViewItem">
-                                <Setter
-                                    Property="HorizontalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="VerticalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="Background"
-                                    Value="Transparent" />
-                                <Setter
-                                    Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate
-                                            TargetType="ListViewItem">
-                                            <ContentPresenter />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0,10,0,10"
-                Visibility="{Binding Item.Seats, Converter={StaticResource StringArrayToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Seats" />
-                    <ListView
-                        ItemsSource="{Binding Item.Seats}"
-                        IsItemClickEnabled="False">
-                        <ListView.ItemContainerStyle>
-                            <Style 
-                                TargetType="ListViewItem">
-                                <Setter
-                                    Property="HorizontalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="VerticalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="Background"
-                                    Value="Transparent" />
-                                <Setter
-                                    Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate
-                                            TargetType="ListViewItem">
-                                            <ContentPresenter />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding CurrentLord, Converter={StaticResource CharacterToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Current Lord" />
-                    <ListViewItem
-                        Width="500">
-                        <Button 
-                            Click="Character_Click"
-                            Tag="{Binding CurrentLord}"
-                            Style="{StaticResource TextBlockButtonStyle}"
-                            Padding="0"
-                            Margin="0"
-                            BorderThickness="0">
-                            <TextBlock
-                                Text="{Binding CurrentLord.Name}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                                Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
-                        </Button>
-                    </ListViewItem>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Heir, Converter={StaticResource CharacterToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Heir" />
-                    <ListViewItem
-                        Width="500">
-                        <Button
-                            Click="Character_Click"
-                            Tag="{Binding Heir}"
-                            Style="{StaticResource TextBlockButtonStyle}"
-                            Padding="0"
-                            Margin="0"
-                            BorderThickness="0">
-                            <TextBlock
-                                Text="{Binding Heir.Name}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                                Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
-                        </Button>
-                    </ListViewItem>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Overlord, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Overlord" />
-                    <ListViewItem
-                        Width="500">
-                        <Button
-                            Click="House_Click"
-                            Tag="{Binding Overlord}"
-                            Style="{StaticResource TextBlockButtonStyle}"
-                            Padding="0"
-                            Margin="0"
-                            BorderThickness="0">
-                            <TextBlock
-                                Text="{Binding Overlord.Name}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                                Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
-                        </Button>
-                    </ListViewItem>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.Founded, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Founded" />
-                    <TextBlock
-                        Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="{Binding Item.Founded}" 
-                        Margin="20,0,0,0" />
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Founder, Converter={StaticResource CharacterToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Founder" />
-                    <ListViewItem
-                        Width="500">
-                        <Button
-                            Click="Character_Click"
-                            Tag="{Binding Founder}"
-                            Style="{StaticResource TextBlockButtonStyle}"
-                            Padding="0"
-                            Margin="0"
-                            BorderThickness="0">
-                            <TextBlock
-                                Text="{Binding Founder.Name}"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                                Foreground="{StaticResource SystemControlForegroundBaseHighBrush}" />
-                        </Button>
-                    </ListViewItem>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.DiedOut, Converter={StaticResource StringToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Died Out" />
-                    <TextBlock
-                        Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="{Binding Item.DiedOut}" 
-                        Margin="20,0,0,0" />
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0,10,0,10"
-                Visibility="{Binding Item.AncestralWeapons, Converter={StaticResource StringArrayToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Anestral Weapons" />
-                    <ListView
-                        ItemsSource="{Binding Item.AncestralWeapons}"
-                        IsItemClickEnabled="False">
-                        <ListView.ItemContainerStyle>
-                            <Style 
-                                TargetType="ListViewItem">
-                                <Setter
-                                    Property="HorizontalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="VerticalContentAlignment"
-                                    Value="Stretch" />
-                                <Setter
-                                    Property="Background"
-                                    Value="Transparent" />
-                                <Setter
-                                    Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate
-                                            TargetType="ListViewItem">
-                                            <ContentPresenter />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </ListViewItem>
-
-            <ListViewItem
-                Margin="0,10,0,10"
-                Visibility="{Binding CadetBranches.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        FontWeight="Bold"
-                        Text="Cadet Branches" />
-                    <ListView
-                        ItemsSource="{Binding CadetBranches}"
-                        Width="500"
-                        IsItemClickEnabled="True"
-                        ItemClick="HouseList_Click">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding Name}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
-            </ListViewItem>
-
-            <StackPanel
-                Orientation="Vertical"
-                Margin="0, 10, 0, 10"
-                Visibility="{Binding Item.SwornMembers, Converter={StaticResource StringArrayToVisibilityConverter}}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Style="{StaticResource BodyTextBlockStyle}"
-                        Text="Sworn Members"
-                        FontWeight="Bold" />
-                    <Button
-                        x:Name="PreviousCharacterBatchButton"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}" 
-                        Click="PreviousCharacterBatchButton_Click">
-                        <TextBlock
-                            Text="Previous"
-                            Style="{StaticResource SubtitleTextBlockStyle}"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"/>
-                    </Button>
-
-                    <Button
-                        x:Name="NextCharacterBatchButton"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Width="Auto"
-                        Style="{StaticResource CommandBarFlyoutEllipsisButtonStyle}"
-                        Click="NextCharacterBatchButton_Click">
-                        <TextBlock
-                                Text="Next"
-                                Style="{StaticResource SubtitleTextBlockStyle}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                    </Button>
-                    <ListView
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        MinWidth="400"
-                        ItemsSource="{Binding SwornMembers}"
-                        ItemClick="CharacterList_ItemClick"
-                        IsItemClickEnabled="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding Name}"
-                                    Style="{StaticResource SubtitleTextBlockStyle}"
-                                    VerticalAlignment="Center"
-                                    Margin="20,0,0,0" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </StackPanel>
-
-        </ListView>
+      <TextBlock 
+        Text='{Binding Item.Name}'
+        Style='{StaticResource HeaderTextBlockStyle}'
+        Grid.Column='1'
+        VerticalAlignment='Center'
+        HorizontalAlignment='Left'
+        Margin='20,20,0,20'/>
     </Grid>
+
+    <!-- Actual details -->
+    <ListView
+      Grid.Row='1'
+      Grid.Column='0'
+      Grid.ColumnSpan='2'
+      IsItemClickEnabled='False'
+      SelectionMode='None'>
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Region, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Region' />
+          <TextBlock
+            Style='{StaticResource SubtitleTextBlockStyle}'
+            Text='{Binding Item.Region}' 
+            Margin='20,0,0,0' />
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.CoatOfArms, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Coat of Arms' />
+          <TextBlock
+            Style='{StaticResource SubtitleTextBlockStyle}'
+            Text='{Binding Item.CoatOfArms}' 
+            Margin='20,0,0,0' />
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Words, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Words' />
+          <TextBlock
+            Style='{StaticResource SubtitleTextBlockStyle}'
+            Text='{Binding Item.Words}' 
+            Margin='20,0,0,0' />
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Titles, Converter={StaticResource StringArrayToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Titles' />
+          <ListView
+            ItemsSource='{Binding Item.Titles}'
+            IsItemClickEnabled='False'>
+            <ListView.ItemContainerStyle>
+              <Style TargetType='ListViewItem'>
+                <Setter
+                  Property='HorizontalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='VerticalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='Background'
+                  Value='Transparent' />
+                <Setter Property='Template'>
+                  <Setter.Value>
+                    <ControlTemplate TargetType='ListViewItem'>
+                      <ContentPresenter />
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Seats, Converter={StaticResource StringArrayToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Seats' />
+          <ListView
+            ItemsSource='{Binding Item.Seats}'
+            IsItemClickEnabled='False'>
+            <ListView.ItemContainerStyle>
+              <Style TargetType='ListViewItem'>
+                <Setter
+                  Property='HorizontalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='VerticalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='Background'
+                  Value='Transparent' />
+                <Setter Property='Template'>
+                  <Setter.Value>
+                    <ControlTemplate TargetType='ListViewItem'>
+                      <ContentPresenter />
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding CurrentLord, Converter={StaticResource CharacterToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Current Lord' />
+          <ListViewItem
+            Tapped='CharacterTappedEventHandler'
+            Tag='{Binding CurrentLord}'
+            Width='500'>
+            <TextBlock
+              Text='{Binding CurrentLord.Name}'
+              Tag='{Binding CurrentLord}'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              Margin='20,0,0,0'
+              Foreground='{StaticResource SystemControlForegroundBaseHighBrush}'/>
+          </ListViewItem>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Heir, Converter={StaticResource CharacterToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Heir' />
+          <ListViewItem
+            Tapped='CharacterTappedEventHandler'
+            Tag='{Binding Heir}'
+            Width='500'>
+            <TextBlock
+              Text='{Binding Heir.Name}'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              Margin='20,0,0,0'
+              Foreground='{StaticResource SystemControlForegroundBaseHighBrush}' />
+          </ListViewItem>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Overlord, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Overlord' />
+          <ListViewItem
+            Tapped='HouseTappedEventHandler'
+            Tag='{Binding Overlord}'
+            Width='500'>
+            <TextBlock
+              Text='{Binding Overlord.Name}'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              Margin='20,0,0,0'
+              Foreground='{StaticResource SystemControlForegroundBaseHighBrush}' />
+          </ListViewItem>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.Founded, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Founded' />
+          <TextBlock
+            Style='{StaticResource SubtitleTextBlockStyle}'
+            Text='{Binding Item.Founded}' 
+            Margin='20,0,0,0' />
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Founder, Converter={StaticResource CharacterToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Founder' />
+          <ListViewItem
+            Tapped='CharacterTappedEventHandler'
+            Tag='{Binding Founder}'
+            Width='500'>
+            <TextBlock
+              Text='{Binding Founder.Name}'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              Margin='20,0,0,0'
+              Foreground='{StaticResource SystemControlForegroundBaseHighBrush}' />
+          </ListViewItem>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.DiedOut, Converter={StaticResource StringToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Died Out' />
+          <TextBlock
+            Style='{StaticResource SubtitleTextBlockStyle}'
+            Text='{Binding Item.DiedOut}' 
+            Margin='20,0,0,0' />
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.AncestralWeapons, Converter={StaticResource StringArrayToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Anestral Weapons' />
+          <ListView
+            ItemsSource='{Binding Item.AncestralWeapons}'
+            IsItemClickEnabled='False'>
+            <ListView.ItemContainerStyle>
+              <Style TargetType='ListViewItem'>
+                <Setter
+                  Property='HorizontalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='VerticalContentAlignment'
+                  Value='Stretch' />
+                <Setter
+                  Property='Background'
+                  Value='Transparent' />
+                <Setter Property='Template'>
+                  <Setter.Value>
+                    <ControlTemplate TargetType='ListViewItem'>
+                      <ContentPresenter />
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackPanel>
+      </ListViewItem>
+
+      <ListViewItem
+        Margin='0,10,0,10'
+        Visibility='{Binding CadetBranches.Count, Converter={StaticResource CountToVisibilityConverter}}'>
+        <StackPanel>
+          <TextBlock 
+            Style='{StaticResource BodyTextBlockStyle}'
+            FontWeight='Bold'
+            Text='Cadet Branches' />
+          <ListView
+            ItemsSource='{Binding CadetBranches}'
+            Width='500'
+            IsItemClickEnabled='True'
+            ItemClick='HouseListItemClickedEventHandler'>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackPanel>
+      </ListViewItem>
+
+      <StackPanel
+        Orientation='Vertical'
+        Margin='0,10,0,10'
+        Visibility='{Binding Item.SwornMembers, Converter={StaticResource StringArrayToVisibilityConverter}}'>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='Auto'/>
+            <RowDefinition Height='*'/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width='*'/>
+            <ColumnDefinition Width='*'/>
+          </Grid.ColumnDefinitions>
+
+          <TextBlock 
+            Grid.Row='0'
+            Grid.Column='0'
+            Style='{StaticResource BodyTextBlockStyle}'
+            Text='Sworn Members'
+            FontWeight='Bold' />
+
+          <Button
+            x:Name='PreviousCharacterBatchButton'
+            Grid.Row='1'
+            Grid.Column='0'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}' 
+            Click='PreviousCharacterBatchButtonClickedEventHandler'>
+            <TextBlock
+              Text='Previous'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+
+          <Button
+            x:Name='NextCharacterBatchButton'
+            Grid.Row='1'
+            Grid.Column='1'
+            Width='Auto'
+            Style='{StaticResource CommandBarFlyoutEllipsisButtonStyle}'
+            Click='NextCharacterBatchButtonClickedEventHandler'>
+            <TextBlock
+              Text='Next'
+              Style='{StaticResource SubtitleTextBlockStyle}'
+              VerticalAlignment='Center'
+              HorizontalAlignment='Center'/>
+          </Button>
+
+          <ListView
+            Grid.Row='2'
+            Grid.Column='0'
+            Grid.ColumnSpan='2'
+            MinWidth='400'
+            ItemsSource='{Binding SwornMembers}'
+            ItemClick='CharacterListItemClickedEventHandler'
+            IsItemClickEnabled='True'>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextBlock 
+                  Text='{Binding Name}'
+                  Style='{StaticResource SubtitleTextBlockStyle}'
+                  VerticalAlignment='Center'
+                  Margin='20,0,0,0' />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </Grid>
+      </StackPanel>
+
+    </ListView>
+  </Grid>
 </Page>

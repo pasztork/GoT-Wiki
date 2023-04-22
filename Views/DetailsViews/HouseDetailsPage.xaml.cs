@@ -1,28 +1,16 @@
 ﻿using GoT_Wiki.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace GoT_Wiki.Views.DetailsViews
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class HouseDetailsPage : Page
     {
         public HouseDetailsPage()
         {
-            this.InitializeComponent();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
+            InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,34 +19,42 @@ namespace GoT_Wiki.Views.DetailsViews
             _ = ViewModel.Load(house);
         }
 
-        private void House_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            Frame.Navigate(typeof(HouseDetailsPage), button.Tag);
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
-        private void Character_Click(object sender, RoutedEventArgs e)
+        private void CharacterTappedEventHandler(object sender, TappedRoutedEventArgs e)
         {
-            var button = sender as Button;
-            Frame.Navigate(typeof(CharacterDetailsPage), button.Tag);
+            var listViewItem = sender as ListViewItem;
+            Frame.Navigate(typeof(CharacterDetailsPage), listViewItem.Tag);
         }
 
-        private void HouseList_Click(object sender, ItemClickEventArgs e)
+        private void HouseTappedEventHandler(object sender, TappedRoutedEventArgs e)
+        {
+            var listViewItem = sender as ListViewItem;
+            Frame.Navigate(typeof(HouseDetailsPage), listViewItem.Tag);
+        }
+
+        private void HouseListItemClickedEventHandler(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(HouseDetailsPage), e.ClickedItem);
         }
 
-        private async void NextCharacterBatchButton_Click(object sender, RoutedEventArgs e)
-        {
-            DisableCharacterFetchButtons();
-            await ViewModel.FetchNextBatch();
-            EnableCharacterFetchButtons();
-        }
-
-        private async void PreviousCharacterBatchButton_Click(object sender, RoutedEventArgs e)
+        private async void PreviousCharacterBatchButtonClickedEventHandler(object sender, RoutedEventArgs e)
         {
             DisableCharacterFetchButtons();
             await ViewModel.FetchPreviousBatch();
+            EnableCharacterFetchButtons();
+        }
+
+        private async void NextCharacterBatchButtonClickedEventHandler(object sender, RoutedEventArgs e)
+        {
+            DisableCharacterFetchButtons();
+            await ViewModel.FetchNextBatch();
             EnableCharacterFetchButtons();
         }
 
@@ -74,7 +70,7 @@ namespace GoT_Wiki.Views.DetailsViews
             NextCharacterBatchButton.IsEnabled = true;
         }
 
-        private void CharacterList_ItemClick(object sender, ItemClickEventArgs e)
+        private void CharacterListItemClickedEventHandler(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
         }
