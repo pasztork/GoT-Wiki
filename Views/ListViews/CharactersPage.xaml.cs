@@ -4,40 +4,34 @@ using GoT_Wiki.Views.DetailsViews;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace GoT_Wiki.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CharactersPage : Page
     {
         private readonly ListViewModel<Character> _viewModel = null;
 
         public CharactersPage()
         {
-            this.InitializeComponent();
-
+            InitializeComponent();
             _viewModel = new ListViewModel<Character>();
             DataContext = _viewModel;
         }
 
-        private async void NextPageButton_Click(object sender, RoutedEventArgs e)
+        private async void NextPageButtonClicked(object sender, RoutedEventArgs e)
         {
             DisablePaginationButtons();
             await _viewModel.FetchNextPage();
             EnablePaginationButtons();
         }
 
-        private async void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+        private async void PreviousPageButtonClicked(object sender, RoutedEventArgs e)
         {
             DisablePaginationButtons();
             await _viewModel.FetchPreviousPage();
             EnablePaginationButtons();
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
             {
@@ -57,7 +51,7 @@ namespace GoT_Wiki.Views
             PreviousPageButton.IsEnabled = true;
         }
 
-        private void CharacterList_ItemClick(object sender, ItemClickEventArgs e)
+        private void CharacterListItemClicked(object sender, ItemClickEventArgs e)
         {
             Frame.Navigate(typeof(CharacterDetailsPage), e.ClickedItem);
         }
