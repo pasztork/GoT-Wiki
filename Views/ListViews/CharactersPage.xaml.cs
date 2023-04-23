@@ -17,6 +17,10 @@ namespace GoT_Wiki.Views
         /// </summary>
         private readonly ListViewModel<Character> _viewModel = null;
 
+        /// <summary>
+        /// Public ctor. Initializes component.
+        /// Sets the data context to _viewModel.
+        /// </summary>
         public CharactersPage()
         {
             InitializeComponent();
