@@ -6,10 +6,21 @@ using Windows.UI.Xaml.Controls;
 
 namespace GoT_Wiki.Views
 {
+    /// <summary>
+    /// Used by View for showing HousesPage (list of houses).
+    /// Contains all methods triggered by UI components.
+    /// </summary>
     public sealed partial class HousesPage : Page
     {
+        /// <summary>
+        /// The ViewModel used by the Page.
+        /// </summary>
         private readonly ListViewModel<House> _viewModel = null;
 
+        /// <summary>
+        /// Public ctor. Initializes component.
+        /// Sets the data context to _viewModel.
+        /// </summary>
         public HousesPage()
         {
             InitializeComponent();

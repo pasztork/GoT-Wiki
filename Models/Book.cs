@@ -2,6 +2,9 @@
 
 namespace GoT_Wiki.Models
 {
+    /// <summary>
+    /// Class <c>Book</c> models a GoT book.
+    /// </summary>
     public class Book
     {
         public string Url { get; set; }

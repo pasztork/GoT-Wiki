@@ -6,8 +6,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GoT_Wiki
 {
+    /// <summary>
+    /// Entry point of the program.
+    /// </summary>
     public sealed partial class App : Application
     {
+        /// <summary>
+        /// Public ctor. Initializes the application.
+        /// </summary>
         public App()
         {
             InitializeComponent();

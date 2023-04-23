@@ -8,18 +8,47 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.ViewModels
 {
+    /// <summary>
+    /// Belongs to HouseDetailsPage.
+    /// Contains the logic and data for presentation.
+    /// </summary>
     public class HouseDetailsPageViewModel : DetailsViewModelBase<House>, INotifyCollectionChanged
     {
+        /// <summary>
+        /// Called whenever a collection is changed.
+        /// </summary>
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
+        /// <summary>
+        /// Current lord of the shown house.
+        /// </summary>
         public Character CurrentLord { get; set; } = null;
+
+        /// <summary>
+        /// Heir of the shown house.
+        /// </summary>
         public Character Heir { get; set; } = null;
+
+        /// <summary>
+        /// Founder of the house.
+        /// </summary>
         public Character Founder { get; set; } = null;
+
+        /// <summary>
+        /// Holds all members who are sworn to the house.
+        /// </summary>
         public ObservableCollection<Character> SwornMembers { get; } = new ObservableCollection<Character>();
         private const int _characterNumberPerBatch = 10;
         private int _currentCharacterIndex = 0;
 
+        /// <summary>
+        /// Overlord of the house.
+        /// </summary>
         public House Overlord { get; set; } = null;
+
+        /// <summary>
+        /// Holds all cadet branches of the house.
+        /// </summary>
         public ObservableCollection<House> CadetBranches { get; } = new ObservableCollection<House>();
 
         private readonly Service<Character> _charactersService = Service<Character>.Instance;
@@ -34,6 +63,67 @@ namespace GoT_Wiki.ViewModels
             }
         }
 
+        /// <summary>
+        /// Fetches next page of sworn members.
+        /// </summary>
+        public async Task FetchNextBatch()
+        {
+            if (_currentCharacterIndex == Item.SwornMembers.Length - 1)
+            {
+                return;
+            }
+
+            if (SwornMembers.Count > 0)
+            {
+                SwornMembers.Clear();
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, nameof(SwornMembers), 0));
+            }
+
+            int startIndex = _currentCharacterIndex;
+            while (_currentCharacterIndex < startIndex + _characterNumberPerBatch)
+            {
+                var character = await _charactersService.GetAsync(
+                    new Uri(Item.SwornMembers[_currentCharacterIndex]));
+                SwornMembers.Add(character);
+                _currentCharacterIndex++;
+                if (_currentCharacterIndex >= Item.SwornMembers.Length)
+                {
+                    _currentCharacterIndex = Item.SwornMembers.Length - 1;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fetches previous page of sworn members.
+        /// </summary>
+        public async Task FetchPreviousBatch()
+        {
+            if (IsFirstPage)
+            {
+                return;
+            }
+
+            if (_currentCharacterIndex == Item.SwornMembers.Length - 1)
+            {
+                _currentCharacterIndex -= _currentCharacterIndex % _characterNumberPerBatch + _characterNumberPerBatch;
+                await FetchNextBatch();
+            }
+
+            _currentCharacterIndex -= 2 * _characterNumberPerBatch;
+            if (_currentCharacterIndex < 0)
+            {
+                _currentCharacterIndex += 2 * _characterNumberPerBatch;
+                return;
+            }
+
+            await FetchNextBatch();
+        }
+
+        /// <summary>
+        /// Called whenever the ViewModel is loaded.
+        /// Fetches all details of the house.
+        /// </summary>
         protected override async Task OnLoad()
         {
             await FetchHouses();
@@ -81,57 +171,6 @@ namespace GoT_Wiki.ViewModels
                 var house = await service.GetAsync(houseUrl);
                 CadetBranches.Add(house);
             }
-        }
-
-        public async Task FetchNextBatch()
-        {
-            if (_currentCharacterIndex == Item.SwornMembers.Length - 1)
-            {
-                return;
-            }
-
-            if (SwornMembers.Count > 0)
-            {
-                SwornMembers.Clear();
-                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, nameof(SwornMembers), 0));
-            }
-
-            int startIndex = _currentCharacterIndex;
-            while (_currentCharacterIndex < startIndex + _characterNumberPerBatch)
-            {
-                var character = await _charactersService.GetAsync(
-                    new Uri(Item.SwornMembers[_currentCharacterIndex]));
-                SwornMembers.Add(character);
-                _currentCharacterIndex++;
-                if (_currentCharacterIndex >= Item.SwornMembers.Length)
-                {
-                    _currentCharacterIndex = Item.SwornMembers.Length - 1;
-                    break;
-                }
-            }
-        }
-
-        public async Task FetchPreviousBatch()
-        {
-            if (IsFirstPage)
-            {
-                return;
-            }
-
-            if (_currentCharacterIndex == Item.SwornMembers.Length - 1)
-            {
-                _currentCharacterIndex -= _currentCharacterIndex % _characterNumberPerBatch + _characterNumberPerBatch;
-                await FetchNextBatch();
-            }
-
-            _currentCharacterIndex -= 2 * _characterNumberPerBatch;
-            if (_currentCharacterIndex < 0)
-            {
-                _currentCharacterIndex += 2 * _characterNumberPerBatch;
-                return;
-            }
-
-            await FetchNextBatch();
         }
     }
 }

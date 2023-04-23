@@ -6,8 +6,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace GoT_Wiki.Views
 {
+    /// <summary>
+    /// Used by View for showing CaharactersPage (list of characters).
+    /// Contains all methods triggered by UI components.
+    /// </summary>
     public sealed partial class CharactersPage : Page
     {
+        /// <summary>
+        /// The ViewModel used by the Page.
+        /// </summary>
         private readonly ListViewModel<Character> _viewModel = null;
 
         public CharactersPage()

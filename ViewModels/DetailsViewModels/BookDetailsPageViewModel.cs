@@ -7,11 +7,25 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.ViewModels
 {
+    /// <summary>
+    /// Belongs to BookDetailsPage.
+    /// Contains the logic and data for presentation.
+    /// </summary>
     public class BookDetailsPageViewModel : DetailsViewModelBase<Book>, INotifyCollectionChanged
     {
+        /// <summary>
+        /// Called any time a collection is changed.
+        /// </summary>
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
+        /// <summary>
+        /// Holds the characters who are present in the book.
+        /// </summary>
         public ObservableCollection<Character> Characters { get; } = new ObservableCollection<Character>();
+
+        /// <summary>
+        /// Holds the characters who had pov chapters in the book.
+        /// </summary>
         public ObservableCollection<Character> PovCharacters { get; } = new ObservableCollection<Character>();
 
         private const int _characterNumberPerBatch = 10;
@@ -19,27 +33,44 @@ namespace GoT_Wiki.ViewModels
         private int _currentPovCharacterIndex = 0;
         private readonly Service<Character> _characterService = Service<Character>.Instance;
 
+        /// <summary>
+        /// When page is loaded,
+        /// fetches next page of characters and pov characters to show.
+        /// </summary>
         protected override async Task OnLoad()
         {
             await FetchNextBatch();
             await FetchNextPovCharacterBatch();
         }
 
+        /// <summary>
+        /// Fetches the next page of characters.
+        /// </summary>
         public async Task FetchNextBatch()
         {
             _currentCharacterIndex = await FetchNext(Characters, Item.Characters, _currentCharacterIndex);
         }
 
+        /// <summary>
+        /// Fetches the previous page of characters.
+        /// </summary>
         public async Task FetchPreviousBatch()
         {
             _currentCharacterIndex = await FetchPrevious(Characters, Item.Characters, _currentCharacterIndex);
         }
 
+        /// <summary>
+        /// Fetches the next page of pov characters.
+        /// </summary>
         public async Task FetchNextPovCharacterBatch()
         {
             _currentPovCharacterIndex = await FetchNext(PovCharacters, Item.PovCharacters, _currentPovCharacterIndex);
         }
 
+        /// <summary>
+        /// Fetches the previous page of pov characters.
+        /// </summary>
+        /// <returns></returns>
         public async Task FetchPreviousPovCharacterBatch()
         {
             _currentPovCharacterIndex = await FetchPrevious(PovCharacters, Item.PovCharacters, _currentPovCharacterIndex);

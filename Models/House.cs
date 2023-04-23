@@ -1,6 +1,8 @@
 ﻿namespace GoT_Wiki.Models
 {
-
+    /// <summary>
+    /// Class <c>House</c> models a GoT house.
+    /// </summary>
     public class House
     {
         public string Url { get; set; }

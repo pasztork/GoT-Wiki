@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 
 namespace GoT_Wiki.Services
 {
+    /// <summary>
+    /// Class <c>Service</c> is used to retrieve 
+    /// data  from An API of Ice And Fire.
+    /// </summary>
+    /// <typeparam name="TClass">The of model retrieved.</typeparam>
     public class Service<TClass>
     {
         private static Service<TClass> _instance;
+
+        /// <summary>
+        /// There is only one instance of service for each model type.
+        /// One can access the instance with this property.
+        /// </summary>
+        /// <remarks>
+        /// Uses lazy initialization.
+        /// </remarks>
         public static Service<TClass> Instance
         {
             get
@@ -45,9 +58,14 @@ namespace GoT_Wiki.Services
         private readonly Uri _serverUrl = new Uri("https://anapioficeandfire.com");
         private readonly string _apiEndpoint = string.Empty;
         private int _pageSize = 0;
+
+        /// <summary>
+        /// Used for setting the page size.
+        /// By default it has a value of 0.
+        /// </summary>
         public int PageSize
         {
-            get { return _pageSize; }
+            private get { return _pageSize; }
             set { _pageSize = value; }
         }
 
@@ -59,12 +77,31 @@ namespace GoT_Wiki.Services
             _process = _typeToActionDictionary[typeof(TClass)] as Action<TClass>;
         }
 
+        /// <summary>
+        /// Used for fetching a list of entities from the API.
+        /// </summary>
+        /// <param name="pageNumber">
+        /// The page number we want to get.
+        /// </param>
+        /// <returns>
+        /// A list of the model items on that page.
+        /// </returns>
         public async Task<IList<TClass>> GetAsync(int pageNumber)
         {
             var uri = new Uri(_serverUrl, $"{_apiEndpoint}?page={pageNumber}&pageSize={_pageSize}");
             return await GetAllMatching(uri);
         }
 
+        /// <summary>
+        /// Used for fetching a single entity from the API.
+        /// </summary>
+        /// <param name="uri">
+        /// The identifier of the entity.
+        /// </param>
+        /// <returns>
+        /// The entity, if it exists. 
+        /// A model instance with none of its properties initialized.
+        /// </returns>
         public async Task<TClass> GetAsync(Uri uri)
         {
             TClass result = default;
@@ -78,12 +115,36 @@ namespace GoT_Wiki.Services
             return result;
         }
 
+        /// <summary>
+        /// Used for fetching a single entity from the API.
+        /// </summary>
+        /// <param name="url">
+        /// The unified resource location of the entity.
+        /// </param>
+        /// <returns>
+        /// The entity, if it exists. 
+        /// A model instance with none of its properties initialized.
+        /// </returns>
         public async Task<TClass> GetAsync(string url)
         {
             var uri = new Uri(url);
             return await GetAsync(uri);
         }
 
+        /// <summary>
+        /// Used for fetching a list of entities, 
+        /// whose name matches the parameter.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the entity.
+        /// </param>
+        /// <returns>
+        /// Returns a list of entities,
+        /// whose name is <para>name</para>.
+        /// </returns>
+        /// <remarks>
+        /// Fetching is not case sensitive.
+        /// </remarks>
         public async Task<IList<TClass>> GetByNameAsync(string name)
         {
             var uri = new Uri(_serverUrl, $"{_apiEndpoint}?name={name}");

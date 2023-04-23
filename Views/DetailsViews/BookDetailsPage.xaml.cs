@@ -6,8 +6,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GoT_Wiki.Views
 {
+    /// <summary>
+    /// Used by View for showing BookDetailsPage.
+    /// Contains all methods triggered by UI components.
+    /// </summary>
     public sealed partial class BookDetailsPage : Page
     {
+        /// <summary>
+        /// Public ctor. Initializes component.
+        /// </summary>
         public BookDetailsPage()
         {
             InitializeComponent();

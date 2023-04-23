@@ -5,8 +5,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GoT_Wiki.Views
 {
+    /// <summary>
+    /// Used by View for showing search result on SearchResultPage.
+    /// Contains all methods triggered by UI components.
+    /// </summary>
     public sealed partial class SearchResultPage : Page
     {
+        /// <summary>
+        /// Public ctor. Initializes component.
+        /// </summary>
         public SearchResultPage()
         {
             InitializeComponent();

@@ -1,5 +1,8 @@
 ﻿namespace GoT_Wiki.Models
 {
+    /// <summary>
+    /// Class <c>Character</c> models a GoT character.
+    /// </summary>
     public class Character
     {
         public string Url { get; set; }
